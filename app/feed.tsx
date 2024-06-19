@@ -1,13 +1,13 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
+import { TabBarIcon } from '@/components/navigation/TabBarIcon'
 
 export default function App() {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Text> FEED TEST </Text>
+        <Text> FEED </Text>
       </View>
-
       <StatusBar style="auto" />
     </View>
   )

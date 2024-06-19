@@ -8,8 +8,8 @@ type Props = {
   theme: string
 }
 
-export default function Button({ label, theme }: Props) {
-  if (theme === 'primary') {
+export default function CustomButton({ label, theme }: Props) {
+  if (theme === 'login') {
     return (
       <Link href="/feed">
         <View

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 
-import Button from '@/components/LoginButton'
+import CustomButton from '@/components/LoginButton'
 
 const logo = require('../assets/images/ootd.png')
 
@@ -12,7 +12,7 @@ export default function App() {
         <Image source={logo} style={styles.image}></Image>
       </View>
       <View style={styles.footerContainer}>
-        <Button label="LOGIN" theme="primary"></Button>
+        <CustomButton label="LOGIN" theme="login"></CustomButton>
       </View>
       <StatusBar style="auto" />
     </View>

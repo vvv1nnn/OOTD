@@ -16,6 +16,8 @@ const firebaseConfig = {
   messagingSenderId: '626417173930',
   appId: '1:626417173930:web:e45af52b74c6fef70057d3',
   measurementId: 'G-6KNF898FK6',
+  databaseURL:
+    'https://ootd-f639b-default-rtdb.asia-southeast1.firebasedatabase.app/',
 }
 
 // Initialize Firebase
@@ -23,3 +25,5 @@ const app = initializeApp(firebaseConfig)
 const analytics = getAnalytics(app)
 const auth = getAuth(app)
 const database = getDatabase(app)
+
+export default database

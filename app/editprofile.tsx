@@ -2,14 +2,14 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import { TabBarIcon } from '@/components/navigation/TabBarIcon'
 import { getDatabase, ref, set } from 'firebase/database'
-import ClothingScreen from './wardrobe'
+import UpdateProfile from '../components/Profile/UpdateProfile'
 
 export default function Feed() {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Text> FEED </Text>
-        <ClothingScreen userId={1} />
+        <Text> EDIT PROFILE </Text>
+        <UpdateProfile userId={'vin'} />
       </View>
       <StatusBar style="auto" />
     </View>

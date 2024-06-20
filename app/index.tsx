@@ -18,7 +18,7 @@ export default function App() {
     // Animation to increase opacity over 1000ms
     Animated.timing(fadeAnim, {
       toValue: 1,
-      duration: 1000,
+      duration: 2000,
       useNativeDriver: true,
     }).start()
   }, [])

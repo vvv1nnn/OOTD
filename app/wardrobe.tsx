@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
-import AddClothingItem from '@/components/Wardrobe/AddItem'
+import AddClothingItem from '@/components/Wardrobe/AddItems'
 
 export default function Wardrobe() {
   return (

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   View,
   TextInput,
@@ -8,6 +8,11 @@ import {
   KeyboardAvoidingView,
   Platform,
   Text,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from 'react-native'
 import firebase from '../../firebaseConfig'
 import { ref, set, get } from 'firebase/database'
@@ -54,60 +59,78 @@ export default function EditProfile({ userId }: { userId: string }) {
   }
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.container}
-    >
-      <View style={styles.sectionContainer}>
-        <Text style={styles.label}>First Name</Text>
-        <TextInput
-          value={firstName}
-          onChangeText={(text) => setFirstName(text)}
-          placeholder="First Name"
-          placeholderTextColor="darkgray"
-          style={styles.input}
-        />
-        <View style={styles.separator} />
-      </View>
+    <ScrollView>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.container}
+      >
+        <View style={styles.imageContainer}>
+          <Image
+            source={require('@/assets/images/SADCAT.png')} // Replace with your image path
+            style={styles.image}
+          />
+        </View>
 
-      <View style={styles.sectionContainer}>
-        <Text style={styles.label}>Email</Text>
-        <TextInput
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-          placeholder="Email"
-          placeholderTextColor="darkgray"
-          inputMode="email"
-          style={styles.input}
-        />
-        <View style={styles.separator} />
-      </View>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.label}>First Name</Text>
+          <TextInput
+            value={firstName}
+            onChangeText={(text) => setFirstName(text)}
+            placeholder="First Name"
+            placeholderTextColor="darkgray"
+            style={styles.input}
+          />
+          <View style={styles.separator} />
+        </View>
 
-      <View style={styles.sectionContainer}>
-        <Text style={styles.label}>Bio</Text>
-        <TextInput
-          value={bio}
-          onChangeText={(text) => setBio(text)}
-          placeholder="Bio"
-          placeholderTextColor="darkgray"
-          multiline={true}
-          style={styles.textArea}
-        />
-        <View style={styles.separator} />
-      </View>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.label}>Email</Text>
+          <TextInput
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+            placeholder="Email"
+            placeholderTextColor="darkgray"
+            inputMode="email"
+            style={styles.input}
+          />
+          <View style={styles.separator} />
+        </View>
 
-      <View style={styles.buttonContainer}>
-        <Button title="Save Profile" onPress={handleSubmit} color="black" />
-      </View>
-    </KeyboardAvoidingView>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.label}>Bio</Text>
+          <TextInput
+            value={bio}
+            onChangeText={(text) => setBio(text)}
+            placeholder="Bio"
+            placeholderTextColor="darkgray"
+            multiline={true}
+            style={styles.textArea}
+          />
+          <View style={styles.separator} />
+        </View>
+
+        <TouchableOpacity style={styles.addButton} onPress={handleSubmit}>
+          <Text style={styles.addButtonText}>Save Profile</Text>
+        </TouchableOpacity>
+      </KeyboardAvoidingView>
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
     backgroundColor: '#fff',
+    padding: 20,
+  },
+  imageContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  image: {
+    width: 100, // Adjust width and height as needed
+    height: 100,
+    borderRadius: 50, // Make it circular
   },
   sectionContainer: {
     marginBottom: 15,
@@ -140,13 +163,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#ccc',
     marginVertical: 10,
   },
-  buttonContainer: {
-    width: 150,
-    alignSelf: 'center',
-    alignItems: 'center',
+  addButton: {
     borderWidth: 1,
-    borderColor: 'black',
-    borderRadius: 10,
-    overflow: 'hidden',
+    borderRadius: 5,
+    margin: 5,
+    paddingVertical: 10,
+    paddingHorizontal: '25%',
+    alignSelf: 'center', // Center the button
+    backgroundColor: 'black',
+  },
+  addButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 })

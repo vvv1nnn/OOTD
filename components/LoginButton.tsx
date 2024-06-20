@@ -8,11 +8,16 @@ type Props = {
   theme: string
 }
 
-export default function CustomButton({ label, theme }: Props) {
-  if (theme === 'login') {
+export default function Login({ label, theme }: Props) {
+  if (theme === 'primary') {
     return (
-      <Link href="/editprofile">
-        <View style={[styles.buttonContainer]}>
+      <Link href="/carousel">
+        <View
+          style={[
+            styles.buttonContainer,
+            { borderWidth: 4, borderColor: '#474747', borderRadius: 18 },
+          ]}
+        >
           <View style={[styles.button, { backgroundColor: '#fff' }]}>
             <Text style={[styles.buttonLabel, { color: '#25292e' }]}>
               {label}
@@ -43,13 +48,12 @@ export default function CustomButton({ label, theme }: Props) {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    width: 150,
-    height: 40,
+    width: 240,
+    height: 68,
+    marginHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: '#474747',
-    borderRadius: 10,
+    padding: 3,
   },
   button: {
     borderRadius: 10,
@@ -62,7 +66,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   buttonIcon: {
-    paddingLeft: 6,
+    paddingLeft: 10,
   },
   buttonLabel: {
     color: 'black',

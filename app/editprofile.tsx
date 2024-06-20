@@ -2,9 +2,11 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import { TabBarIcon } from '@/components/navigation/TabBarIcon'
 import { getDatabase, ref, set } from 'firebase/database'
+import ClothingScreen from './wardrobe'
+import NavBar from '../components/TabBar'
 import UpdateProfile from '../components/Profile/UpdateProfile'
 
-export default function Feed() {
+export default function Profile() {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>

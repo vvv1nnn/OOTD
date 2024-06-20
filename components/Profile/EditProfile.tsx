@@ -35,7 +35,7 @@ export default function EditProfile({ userId }: { userId: string }) {
     })
   }, [userId])
 
-  const handleAddItem = () => {
+  const handleSubmit = () => {
     const dbRef = ref(database, `users/${userId}/profile`)
 
     const newDetails: UserDetails = {
@@ -97,7 +97,7 @@ export default function EditProfile({ userId }: { userId: string }) {
       </View>
 
       <View style={styles.buttonContainer}>
-        <Button title="Save Profile" onPress={handleAddItem} color="black" />
+        <Button title="Save Profile" onPress={handleSubmit} color="black" />
       </View>
     </KeyboardAvoidingView>
   )

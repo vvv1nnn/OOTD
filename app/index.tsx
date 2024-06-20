@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { StyleSheet, Text, View, Animated } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
-import CustomButton from '@/components/LoginButton'
+import CustomButton from '@/components/CustomButton'
 import { useFonts } from 'expo-font' // Importing expo-font for custom fonts
 
 const logo = require('../assets/images/ootd2.png')
@@ -36,7 +36,8 @@ export default function App() {
         </Animated.Text>
       </View>
       <View style={styles.footerContainer}>
-        <CustomButton label="LOGIN" theme="login"></CustomButton>
+        <CustomButton label="LOGIN" theme="login" />
+        <CustomButton label="TEMPORARY " theme="temp" />
       </View>
       <StatusBar style="auto" />
     </View>

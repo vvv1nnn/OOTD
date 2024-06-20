@@ -1,16 +1,16 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import AddClothingItem from '@/components/Wardrobe/AddItem'
 
 export default function Wardrobe() {
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.imageContainer}>
         <Text> WARDROBE </Text>
         <AddClothingItem userId={'vin'} />
       </View>
       <StatusBar style="auto" />
-    </View>
+    </ScrollView>
   )
 }
 

@@ -1,24 +1,70 @@
 import { useState } from 'react'
-import { View, TextInput, Button, Alert, Text } from 'react-native'
-import database from '../../firebaseConfig'
-import { ref, push, set } from 'firebase/database'
+import {
+  View,
+  TextInput,
+  Button,
+  Alert,
+  Text,
+  StyleSheet,
+  Image,
+} from 'react-native'
+import firebase from '../../firebaseConfig'
+import * as ImagePicker from 'expo-image-picker'
+import {
+  ref as databaseRef,
+  push,
+  set,
+  serverTimestamp,
+} from 'firebase/database'
+import {
+  ref as storageRef,
+  uploadBytes,
+  getDownloadURL,
+} from 'firebase/storage'
 
 interface ClothingItem {
   name: string
   type: string
   description: string
-  image: string
+  imageUrl: string
 }
 
 export default function AddClothingItem({ userId }: { userId: string }) {
   const [itemName, setItemName] = useState('')
   const [description, setColor] = useState('')
-  const [image, setImage] = useState('')
+  const [image, setImage] = useState(null)
   const [type, setType] = useState('')
+  const [imageUrl, setImageUrl] = useState('')
+  const [uploading, setUploading] = useState(false)
 
-  const handleAddItem = () => {
+  const handleAddItem = async () => {
+    if (!image) return
+
+    setUploading(true)
+    const response = await fetch(image)
+    const blob = await response.blob()
+    const imageRef = storageRef(
+      firebase.storage,
+      `images/${new Date().toISOString()}`
+    )
+
+    await uploadBytes(imageRef, blob)
+    const downloadURL = await getDownloadURL(imageRef)
+
+    // Save URL to Firebase Realtime Database
+    const newImageRef = push(databaseRef(firebase.database, 'images'))
+    await set(newImageRef, {
+      url: downloadURL,
+      createdAt: serverTimestamp(),
+    })
+
+    setUploading(false)
+    setImage(null)
     // Reference to the database path for the user's clothing items under 'tops'
-    const dbRef = ref(database, `users/${userId}/clothing/${type}`)
+    const dbRef = databaseRef(
+      firebase.database,
+      `users/${userId}/clothing/${type}`
+    )
 
     // Generate a new key for the new item
     const newItemRef = push(dbRef)
@@ -28,7 +74,7 @@ export default function AddClothingItem({ userId }: { userId: string }) {
       name: itemName,
       type: type,
       description: description,
-      image: image,
+      imageUrl: downloadURL,
     }
 
     // Save the new item to Firebase
@@ -48,6 +94,24 @@ export default function AddClothingItem({ userId }: { userId: string }) {
         )
       })
   }
+
+  // Pick an image from device
+  const pickImage = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    })
+
+    if (!result.canceled) {
+      const uri = result.assets[0].uri
+      setImage(uri as any)
+    }
+  }
+
+  // Upload Image to Storage Bucket
+  const uploadImage = async () => {}
 
   return (
     <View>
@@ -89,7 +153,30 @@ export default function AddClothingItem({ userId }: { userId: string }) {
         <Button title="Shoes" onPress={() => setType('shoes')} />
       </View>
 
-      <Button title="Add Item" onPress={handleAddItem} />
+      <View style={styles.container}>
+        <Button title="Pick an image" onPress={pickImage} />
+        {image && <Image source={{ uri: image }} style={styles.image} />}
+        {uploading && <Text style={styles.uploadingText}>Uploading...</Text>}
+      </View>
+      <Button title="Add Item" onPress={handleAddItem} disabled={uploading} />
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  image: {
+    width: 200,
+    height: 200,
+    marginBottom: 10,
+  },
+  uploadingText: {
+    marginTop: 10,
+    fontSize: 16,
+    color: 'gray',
+  },
+})

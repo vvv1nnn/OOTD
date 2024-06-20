@@ -3,6 +3,8 @@ import { initializeApp } from 'firebase/app'
 // import { getAnalytics } from 'firebase/analytics'
 import { getDatabase } from 'firebase/database'
 import { getAuth } from 'firebase/auth'
+import { getStorage } from 'firebase/storage'
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -12,7 +14,7 @@ const firebaseConfig = {
   apiKey: 'AIzaSyAUhiPqywcPECvyAGya1F3DFPP3J06tzzs',
   authDomain: 'ootd-f639b.firebaseapp.com',
   projectId: 'ootd-f639b',
-  storageBucket: 'ootd-f639b.appspot.com',
+  storageBucket: 'gs://ootd-f639b.appspot.com',
   messagingSenderId: '626417173930',
   appId: '1:626417173930:web:e45af52b74c6fef70057d3',
   measurementId: 'G-6KNF898FK6',
@@ -25,5 +27,6 @@ const app = initializeApp(firebaseConfig)
 // const analytics = getAnalytics(app)
 const auth = getAuth(app)
 const database = getDatabase(app)
+const storage = getStorage(app)
 
-export default database
+export default { database, storage, auth }

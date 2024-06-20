@@ -1,9 +1,9 @@
 import { ScrollView, StyleSheet, Text, View, Image } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
-import ProfileName from '@/components/Profile/Username.tsx'
-import ProfileBio from '@/components/Profile/Bio.tsx'
-import ProfilePicture from '@/components/Profile/ProfilePicture.tsx'
-import ProfileWardrobe from '@/components/Profile/Wardrobe.tsx'
+import ProfileName from '@/components/Profile/Username'
+import ProfileBio from '@/components/Profile/Bio'
+import ProfilePicture from '@/components/Profile/ProfilePicture'
+import ProfileWardrobe from '@/components/Profile/Wardrobe'
 import React from 'react'
 
 export default function profilePage() {

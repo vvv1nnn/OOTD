@@ -27,6 +27,24 @@ export default function CustomButton({ label, theme }: Props) {
         </View>
       </Link>
     )
+  } else {
+    return (
+      <Link href="/wardrobe">
+        <View style={[styles.buttonContainer]}>
+          <View style={[styles.button, { backgroundColor: '#fff' }]}>
+            <Text style={[styles.buttonLabel, { color: '#25292e' }]}>
+              {label}
+            </Text>
+            <FontAwesome
+              name="arrow-circle-right"
+              size={18}
+              color="#25292e"
+              style={styles.buttonIcon}
+            />
+          </View>
+        </View>
+      </Link>
+    )
   }
 
   return (

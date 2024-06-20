@@ -8,7 +8,7 @@ export default function Feed() {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Text> EDIT PROFILE </Text>
+        <Text style={styles.profile}> EDIT PROFILE </Text>
         <UpdateProfile userId={'vin'} />
       </View>
       <StatusBar style="auto" />
@@ -35,5 +35,8 @@ const styles = StyleSheet.create({
   footerContainer: {
     flex: 1 / 3,
     alignItems: 'center',
+  },
+  profile: {
+    textAlign: 'center',
   },
 })

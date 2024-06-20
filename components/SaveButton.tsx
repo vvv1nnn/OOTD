@@ -25,7 +25,7 @@ const SaveButton = ({
       ]}
       onPress={onPress}
     >
-      <Text style={[styles.buttonText, textStyle]}>{title}Save</Text>
+      <Text style={[styles.buttonText, textStyle]}>{title}</Text>
     </TouchableOpacity>
   )
 }

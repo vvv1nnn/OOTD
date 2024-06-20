@@ -24,8 +24,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: -500, // Padding to expand the background color horizontally
   },
   imageContainer: {
-    backgroundColor: '#414141', // Background color behind the logo
-    padding: 20,
     borderRadius: 10,
     alignItems: 'center',
     width: '100%', // Ensure the background color spans the entire screen width

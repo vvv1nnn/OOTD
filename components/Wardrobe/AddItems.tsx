@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import {
   View,
   TextInput,
@@ -6,6 +6,8 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from 'react-native'
 import database from '../../firebaseConfig'
 import { ref, push, set } from 'firebase/database'
@@ -19,11 +21,19 @@ interface ClothingItem {
 
 export default function AddClothingItem({ userId }: { userId: string }) {
   const [itemName, setItemName] = useState('')
-  const [description, setColor] = useState('')
+  const [description, setDescription] = useState('')
   const [image, setImage] = useState('')
   const [type, setType] = useState('')
 
   const handleAddItem = () => {
+    if (!itemName || !description || !type) {
+      Alert.alert(
+        'Error',
+        'Please fill in all the fields and select a category.'
+      )
+      return
+    }
+
     const dbRef = ref(database, `users/${userId}/clothing/${type}`)
     const newItemRef = push(dbRef)
     const newItem: ClothingItem = {
@@ -38,7 +48,7 @@ export default function AddClothingItem({ userId }: { userId: string }) {
         console.log('New clothing item added successfully!')
         Alert.alert('Success', 'New clothing item added successfully!')
         setItemName('')
-        setColor('')
+        setDescription('')
         setType('')
       })
       .catch((error) => {
@@ -59,131 +69,146 @@ export default function AddClothingItem({ userId }: { userId: string }) {
   }
 
   return (
-    <View>
-      <Text style={styles.temp}>INSERT IMAGE UPLOADER HERE</Text>
-      <TextInput
-        value={itemName}
-        onChangeText={(text) => setItemName(text)}
-        placeholder="Name of item"
-        placeholderTextColor="darkgray"
-        style={{
-          height: 40,
-          width: '80%',
-          borderColor: 'gray',
-          marginHorizontal: '10%',
-          borderWidth: 1,
-          paddingHorizontal: 10,
-        }}
-      />
-      <TextInput
-        value={description}
-        onChangeText={(text) => setColor(text)}
-        placeholder="Enter Description"
-        placeholderTextColor="darkgray"
-        multiline={true}
-        style={{
-          height: 100,
-          width: '80%',
-          marginHorizontal: '10%',
-          borderColor: 'gray',
-          borderWidth: 1,
-          paddingHorizontal: 10,
-          marginVertical: 10,
-        }}
-      />
-      <Text style={styles.category}> Select Item Category </Text>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <Text style={styles.temp}>INSERT IMAGE UPLOADER HERE</Text>
+        <TextInput
+          value={itemName}
+          onChangeText={(text) => setItemName(text)}
+          placeholder="Name of item"
+          placeholderTextColor="darkgray"
+          style={styles.input}
+        />
+        <TextInput
+          value={description}
+          onChangeText={(text) => setDescription(text)}
+          placeholder="Enter Description"
+          placeholderTextColor="darkgray"
+          multiline={true}
+          style={styles.textArea}
+        />
+        <Text style={styles.category}> Select Item Category </Text>
 
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={[
-            styles.buttonWrapper,
-            type === 'hats' && styles.selectedButton,
-          ]}
-          onPress={() => toggleCategory('hats')}
-        >
-          <Text
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
             style={[
-              styles.buttonText,
-              type === 'hats' && styles.selectedButtonText,
+              styles.buttonWrapper,
+              type === 'headwear' && styles.selectedButton,
             ]}
+            onPress={() => toggleCategory('headwear')}
           >
-            Hat
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.buttonWrapper,
-            type === 'tops' && styles.selectedButton,
-          ]}
-          onPress={() => toggleCategory('tops')}
-        >
-          <Text
+            <Text
+              style={[
+                styles.buttonText,
+                type === 'headwear' && styles.selectedButtonText,
+              ]}
+            >
+              Headwear
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
             style={[
-              styles.buttonText,
-              type === 'tops' && styles.selectedButtonText,
+              styles.buttonWrapper,
+              type === 'outerwear' && styles.selectedButton,
             ]}
+            onPress={() => toggleCategory('outerwear')}
           >
-            Top
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.buttonWrapper,
-            type === 'jackets' && styles.selectedButton,
-          ]}
-          onPress={() => toggleCategory('jackets')}
-        >
-          <Text
+            <Text
+              style={[
+                styles.buttonText,
+                type === 'outerwear' && styles.selectedButtonText,
+              ]}
+            >
+              Outerwear
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
             style={[
-              styles.buttonText,
-              type === 'jackets' && styles.selectedButtonText,
+              styles.buttonWrapper,
+              type === 'tops' && styles.selectedButton,
             ]}
+            onPress={() => toggleCategory('tops')}
           >
-            Jacket
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.buttonWrapper,
-            type === 'bottoms' && styles.selectedButton,
-          ]}
-          onPress={() => toggleCategory('bottoms')}
-        >
-          <Text
+            <Text
+              style={[
+                styles.buttonText,
+                type === 'tops' && styles.selectedButtonText,
+              ]}
+            >
+              Tops
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
             style={[
-              styles.buttonText,
-              type === 'bottoms' && styles.selectedButtonText,
+              styles.buttonWrapper,
+              type === 'bottoms' && styles.selectedButton,
             ]}
+            onPress={() => toggleCategory('bottoms')}
           >
-            Bottom
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.buttonWrapper,
-            type === 'shoes' && styles.selectedButton,
-          ]}
-          onPress={() => toggleCategory('shoes')}
-        >
-          <Text
+            <Text
+              style={[
+                styles.buttonText,
+                type === 'bottoms' && styles.selectedButtonText,
+              ]}
+            >
+              Bottoms
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
             style={[
-              styles.buttonText,
-              type === 'shoes' && styles.selectedButtonText,
+              styles.buttonWrapper,
+              type === 'shoes' && styles.selectedButton,
             ]}
+            onPress={() => toggleCategory('shoes')}
           >
-            Footwear
-          </Text>
+            <Text
+              style={[
+                styles.buttonText,
+                type === 'shoes' && styles.selectedButtonText,
+              ]}
+            >
+              Footwear
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <TouchableOpacity style={styles.addButton} onPress={handleAddItem}>
+          <Text style={styles.addButtonText}>Add Item</Text>
         </TouchableOpacity>
       </View>
-
-      <TouchableOpacity style={styles.addButton} onPress={handleAddItem}>
-        <Text style={styles.buttonText}>Add Item</Text>
-      </TouchableOpacity>
-    </View>
+    </TouchableWithoutFeedback>
   )
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  input: {
+    height: 40,
+    width: '80%',
+    borderColor: 'gray',
+    marginHorizontal: '10%',
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    marginVertical: 10,
+  },
+  textArea: {
+    height: 100,
+    width: '80%',
+    marginHorizontal: '10%',
+    borderColor: 'gray',
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    marginVertical: 10,
+  },
+  category: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    marginVertical: 10,
+  },
   buttonContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -214,11 +239,12 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: '25%',
     alignSelf: 'center', // Center the button
+    backgroundColor: 'black',
   },
-  category: {
-    textAlign: 'center',
+  addButtonText: {
+    color: 'white',
     fontWeight: 'bold',
-    marginVertical: 10,
+    textAlign: 'center',
   },
   temp: {
     textAlign: 'center',

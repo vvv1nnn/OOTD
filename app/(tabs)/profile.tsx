@@ -14,6 +14,7 @@ export default function profilePage() {
           <ProfilePicture />
           <ProfileName />
           <ProfileBio />
+          <View style={styles.separator} />
           <ProfileWardrobe />
         </View>
 
@@ -29,9 +30,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
   },
+  separator: {
+    height: 1,
+    backgroundColor: '#ccc',
+    marginVertical: 10,
+  },
   imageContainer: {
     flex: 1,
-    paddingTop: 58,
+
     marginTop: 10,
   },
   image: {

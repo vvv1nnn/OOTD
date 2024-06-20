@@ -38,8 +38,9 @@ import { Stack } from 'expo-router'
 const StackLayout = () => {
   return (
     <Stack>
-      <Stack.Screen name="feed" />
-      <Stack.Screen name="profile" />
+      <Stack.Screen name="index" />
+      <Stack.Screen name="editprofile" />
+      <Stack.Screen name="wardrobe" />
     </Stack>
   )
 }

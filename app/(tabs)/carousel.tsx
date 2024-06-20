@@ -1,16 +1,13 @@
+import React from 'react'
 import {
   StyleSheet,
   Text,
   View,
-  Image,
   ScrollView,
-  Button,
   SafeAreaView,
-  Alert,
+  TouchableOpacity,
 } from 'react-native'
-import { StatusBar } from 'expo-status-bar'
-import React from 'react'
-import Headwear from '@/components/Carousel/Headwear.tsx' // Import your component
+import Headwear from '@/components/Carousel/Headwear.tsx'
 import Tops from '@/components/Carousel/Tops.tsx'
 import Outerwear from '@/components/Carousel/Outerwear.tsx'
 import Bottoms from '@/components/Carousel/Bottoms.tsx'
@@ -19,17 +16,14 @@ import Accessories from '@/components/Carousel/Accessories.tsx'
 import ShuffleButton from '@/components/ShuffleButton.tsx'
 import SaveButton from '@/components/SaveButton.tsx'
 
-// import Header from '../components/Header.tsx'
-
 const logo = require('@/assets/images/ootd.png')
 
 export default function App() {
   return (
-    <SafeAreaView>
-      {/* <Header /> */}
+    <SafeAreaView style={styles.safeArea}>
       <ScrollView>
         <View style={styles.imageContainer2}>
-          <Image source={logo} style={styles.image2}></Image>
+          <Text style={styles.text}>OOTD.</Text>
         </View>
         <View style={styles.container}>
           <Text style={styles.sectionHeader}>Headwear</Text>
@@ -45,32 +39,39 @@ export default function App() {
           <Text style={styles.sectionHeader}>Footwear</Text>
           <Footwear />
         </View>
-        <ShuffleButton style={styles.buttonContainer} />
-        <SaveButton style={styles.buttonContainer} />
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.addButton}>
+            <Text style={styles.addButtonText}>Shuffle</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.addButton}>
+            <Text style={styles.addButtonText}>Save</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
   },
-  imageContainer: {
-    flex: 1,
-    paddingTop: 58,
-    marginTop: 10,
+  text: {
+    fontFamily: 'TYPOGRAPH-PRO-Semi-Bold',
+    fontSize: 50,
+    paddingTop: 20,
   },
-  image: {
-    width: 320,
-    height: 200,
-    borderRadius: 18,
-  },
-  footerContainer: {
-    flex: 1 / 3,
+  imageContainer2: {
     alignItems: 'center',
+    backgroundColor: '#fff',
   },
   sectionHeader: {
     fontSize: 20,
@@ -78,41 +79,26 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 10,
   },
-  container2: {
-    flex: 1,
-  },
-  imageContainer2: {
-    alignItems: 'center',
-  },
-  image2: {
-    height: 100,
-  },
-
   buttonContainer: {
-    width: 240,
-    height: 68,
-    marginHorizontal: 130,
-    marginVertical: 10,
+    width: 150,
+    alignSelf: 'center',
     alignItems: 'center',
-    justifyContent: 'center',
-    padding: 3,
-    marginTop: 10,
-  },
-  button: {
     borderRadius: 10,
-    borderColor: 'black',
-    borderStyle: 'solid',
-    width: '100%',
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
+    overflow: 'hidden',
+    marginBottom: 10,
   },
-  buttonIcon: {
-    paddingLeft: 8,
+  addButton: {
+    borderWidth: 1,
+    borderRadius: 5,
+    margin: 5,
+    paddingVertical: 10,
+    paddingHorizontal: '25%',
+    alignSelf: 'center', // Center the button
+    backgroundColor: 'black',
   },
-  buttonLabel: {
-    color: 'black',
-    fontSize: 20,
+  addButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 })

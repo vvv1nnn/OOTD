@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
-import UpdateProfile from '../components/Profile/UpdateProfile'
+import UpdateProfile from '@/components/Profile/UpdateProfile'
 
 export default function Profile() {
   return (
@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     flex: 1,
-    paddingTop: 58,
     marginTop: 10,
   },
   image: {

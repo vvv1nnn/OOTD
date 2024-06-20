@@ -11,13 +11,8 @@ type Props = {
 export default function CustomButton({ label, theme }: Props) {
   if (theme === 'login') {
     return (
-      <Link href="/wardrobe">
-        <View
-          style={[
-            styles.buttonContainer,
-            { borderWidth: 4, borderColor: '#474747', borderRadius: 18 },
-          ]}
-        >
+      <Link href="/editprofile">
+        <View style={[styles.buttonContainer]}>
           <View style={[styles.button, { backgroundColor: '#fff' }]}>
             <Text style={[styles.buttonLabel, { color: '#25292e' }]}>
               {label}
@@ -48,12 +43,13 @@ export default function CustomButton({ label, theme }: Props) {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    width: 240,
-    height: 68,
-    marginHorizontal: 20,
+    width: 150,
+    height: 40,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 3,
+    borderWidth: 1,
+    borderColor: '#474747',
+    borderRadius: 10,
   },
   button: {
     borderRadius: 10,
@@ -66,7 +62,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   buttonIcon: {
-    paddingLeft: 8,
+    paddingLeft: 6,
   },
   buttonLabel: {
     color: 'black',

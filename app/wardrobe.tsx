@@ -1,16 +1,16 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
-import UpdateProfile from '../components/Profile/UpdateProfile'
+import AddClothingItem from '@/components/Wardrobe/AddItem'
 
-export default function Profile() {
+export default function Wardrobe() {
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.imageContainer}>
-        <Text style={styles.profile}> EDIT PROFILE </Text>
-        <UpdateProfile userId={'vin'} />
+        <Text> WARDROBE </Text>
+        <AddClothingItem userId={'vin'} />
       </View>
       <StatusBar style="auto" />
-    </View>
+    </ScrollView>
   )
 }
 
@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     flex: 1,
+    paddingTop: 58,
     marginTop: 10,
   },
   image: {
@@ -32,9 +33,5 @@ const styles = StyleSheet.create({
   footerContainer: {
     flex: 1 / 3,
     alignItems: 'center',
-  },
-  profile: {
-    textAlign: 'center',
-    fontWeight: 'bold',
   },
 })

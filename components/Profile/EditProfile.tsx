@@ -14,7 +14,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native'
-import database from '../../firebaseConfig'
+import firebase from '../../firebaseConfig'
 import { ref, set, get } from 'firebase/database'
 
 interface UserDetails {
@@ -29,7 +29,7 @@ export default function EditProfile({ userId }: { userId: string }) {
   const [bio, setBio] = useState('')
 
   useEffect(() => {
-    const dbRef = ref(database, `users/${userId}/profile`)
+    const dbRef = ref(firebase.database, `users/${userId}/profile`)
     get(dbRef).then((snapshot) => {
       if (snapshot.exists()) {
         const data = snapshot.val()
@@ -41,7 +41,7 @@ export default function EditProfile({ userId }: { userId: string }) {
   }, [userId])
 
   const handleSubmit = () => {
-    const dbRef = ref(database, `users/${userId}/profile`)
+    const dbRef = ref(firebase.database, `users/${userId}/profile`)
 
     const newDetails: UserDetails = {
       firstName: firstName,

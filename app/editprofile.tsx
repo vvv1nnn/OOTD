@@ -1,11 +1,6 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
-import { TabBarIcon } from '@/components/navigation/TabBarIcon'
-import { getDatabase, ref, set } from 'firebase/database'
-import ClothingScreen from './wardrobe'
-import NavBar from '@/components/TabBar'
-import UpdateProfile from '@/components/Profile/UpdateProfile'
-import React from 'react'
+import UpdateProfile from '../components/Profile/UpdateProfile'
 
 export default function Profile() {
   return (
@@ -41,5 +36,6 @@ const styles = StyleSheet.create({
   },
   profile: {
     textAlign: 'center',
+    fontWeight: 'bold',
   },
 })

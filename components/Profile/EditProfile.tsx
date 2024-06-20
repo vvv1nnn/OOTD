@@ -8,6 +8,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Text,
+  Image, // Import Image component
 } from 'react-native'
 import database from '../../firebaseConfig'
 import { ref, set, get } from 'firebase/database'
@@ -58,6 +59,13 @@ export default function EditProfile({ userId }: { userId: string }) {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}
     >
+      <View style={styles.imageContainer}>
+        <Image
+          source={require('@/assets/images/SADCAT.png')} // Replace with your image path
+          style={styles.image}
+        />
+      </View>
+
       <View style={styles.sectionContainer}>
         <Text style={styles.label}>First Name</Text>
         <TextInput
@@ -106,8 +114,17 @@ export default function EditProfile({ userId }: { userId: string }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
     backgroundColor: '#fff',
+    padding: 20,
+  },
+  imageContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  image: {
+    width: 100, // Adjust width and height as needed
+    height: 100,
+    borderRadius: 50, // Make it circular
   },
   sectionContainer: {
     marginBottom: 15,

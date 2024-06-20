@@ -1,8 +1,14 @@
 import { useState } from 'react'
-import { View, TextInput, Button, Alert, Text } from 'react-native'
+import {
+  View,
+  TextInput,
+  Alert,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native'
 import database from '../../firebaseConfig'
 import { ref, push, set } from 'firebase/database'
-import React from 'react'
 
 interface ClothingItem {
   name: string
@@ -18,13 +24,8 @@ export default function AddClothingItem({ userId }: { userId: string }) {
   const [type, setType] = useState('')
 
   const handleAddItem = () => {
-    // Reference to the database path for the user's clothing items under 'tops'
     const dbRef = ref(database, `users/${userId}/clothing/${type}`)
-
-    // Generate a new key for the new item
     const newItemRef = push(dbRef)
-
-    // Create an object with the new item's data
     const newItem: ClothingItem = {
       name: itemName,
       type: type,
@@ -32,7 +33,6 @@ export default function AddClothingItem({ userId }: { userId: string }) {
       image: image,
     }
 
-    // Save the new item to Firebase
     set(newItemRef, newItem)
       .then(() => {
         console.log('New clothing item added successfully!')
@@ -50,20 +50,29 @@ export default function AddClothingItem({ userId }: { userId: string }) {
       })
   }
 
+  const toggleCategory = (category: string) => {
+    if (type === category) {
+      setType('') // Deselect if the same category is clicked
+    } else {
+      setType(category) // Select new category
+    }
+  }
+
   return (
     <View>
+      <Text style={styles.temp}>INSERT IMAGE UPLOADER HERE</Text>
       <TextInput
         value={itemName}
         onChangeText={(text) => setItemName(text)}
-        placeholder="Enter item name"
+        placeholder="Name of item"
         placeholderTextColor="darkgray"
         style={{
           height: 40,
-          width: 220,
+          width: '80%',
           borderColor: 'gray',
+          marginHorizontal: '10%',
           borderWidth: 1,
           paddingHorizontal: 10,
-          margin: 10,
         }}
       />
       <TextInput
@@ -74,23 +83,145 @@ export default function AddClothingItem({ userId }: { userId: string }) {
         multiline={true}
         style={{
           height: 100,
-          width: 220,
+          width: '80%',
+          marginHorizontal: '10%',
           borderColor: 'gray',
           borderWidth: 1,
           paddingHorizontal: 10,
-          margin: 10,
+          marginVertical: 10,
         }}
       />
-      <Text> {type} </Text>
-      <View>
-        <Button title="Hat" onPress={() => setType('hats')} />
-        <Button title="Top" onPress={() => setType('tops')} />
-        <Button title="Jacket" onPress={() => setType('jackets')} />
-        <Button title="Bottom" onPress={() => setType('bottoms')} />
-        <Button title="Shoes" onPress={() => setType('shoes')} />
+      <Text style={styles.category}> Select Item Category </Text>
+
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={[
+            styles.buttonWrapper,
+            type === 'hats' && styles.selectedButton,
+          ]}
+          onPress={() => toggleCategory('hats')}
+        >
+          <Text
+            style={[
+              styles.buttonText,
+              type === 'hats' && styles.selectedButtonText,
+            ]}
+          >
+            Hat
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.buttonWrapper,
+            type === 'tops' && styles.selectedButton,
+          ]}
+          onPress={() => toggleCategory('tops')}
+        >
+          <Text
+            style={[
+              styles.buttonText,
+              type === 'tops' && styles.selectedButtonText,
+            ]}
+          >
+            Top
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.buttonWrapper,
+            type === 'jackets' && styles.selectedButton,
+          ]}
+          onPress={() => toggleCategory('jackets')}
+        >
+          <Text
+            style={[
+              styles.buttonText,
+              type === 'jackets' && styles.selectedButtonText,
+            ]}
+          >
+            Jacket
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.buttonWrapper,
+            type === 'bottoms' && styles.selectedButton,
+          ]}
+          onPress={() => toggleCategory('bottoms')}
+        >
+          <Text
+            style={[
+              styles.buttonText,
+              type === 'bottoms' && styles.selectedButtonText,
+            ]}
+          >
+            Bottom
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.buttonWrapper,
+            type === 'shoes' && styles.selectedButton,
+          ]}
+          onPress={() => toggleCategory('shoes')}
+        >
+          <Text
+            style={[
+              styles.buttonText,
+              type === 'shoes' && styles.selectedButtonText,
+            ]}
+          >
+            Footwear
+          </Text>
+        </TouchableOpacity>
       </View>
 
-      <Button title="Add Item" onPress={handleAddItem} />
+      <TouchableOpacity style={styles.addButton} onPress={handleAddItem}>
+        <Text style={styles.buttonText}>Add Item</Text>
+      </TouchableOpacity>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  buttonContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    marginVertical: 10,
+  },
+  buttonWrapper: {
+    borderWidth: 1,
+    borderRadius: 5,
+    margin: 5,
+    overflow: 'hidden',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: 'white',
+  },
+  selectedButton: {
+    backgroundColor: 'lightgray',
+  },
+  buttonText: {
+    color: 'black',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  addButton: {
+    borderWidth: 1,
+    borderRadius: 5,
+    margin: 5,
+    paddingVertical: 10,
+    paddingHorizontal: '25%',
+    alignSelf: 'center', // Center the button
+  },
+  category: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    marginVertical: 10,
+  },
+  temp: {
+    textAlign: 'center',
+    margin: 10,
+  },
+})

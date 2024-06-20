@@ -1,13 +1,12 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import AddClothingItem from '@/components/Wardrobe/AddItems'
-import React from 'react'
 
 export default function Wardrobe() {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Text> WARDROBE </Text>
+        <Text style={styles.wardrobe}> WARDROBE </Text>
         <AddClothingItem userId={'vin'} />
       </View>
       <StatusBar style="auto" />
@@ -16,6 +15,11 @@ export default function Wardrobe() {
 }
 
 const styles = StyleSheet.create({
+  wardrobe: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    margin: 10,
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',

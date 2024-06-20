@@ -3,8 +3,9 @@ import { StatusBar } from 'expo-status-bar'
 import { TabBarIcon } from '@/components/navigation/TabBarIcon'
 import { getDatabase, ref, set } from 'firebase/database'
 import ClothingScreen from './wardrobe'
-import NavBar from '../components/TabBar'
-import UpdateProfile from '../components/Profile/UpdateProfile'
+import NavBar from '@/components/TabBar'
+import UpdateProfile from '@/components/Profile/UpdateProfile'
+import React from 'react'
 
 export default function Profile() {
   return (

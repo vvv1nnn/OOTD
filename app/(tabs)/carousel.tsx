@@ -10,18 +10,18 @@ import {
 } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import React from 'react'
-import Headwear from '../components/Carousel/Headwear.tsx' // Import your component
-import Tops from '../components/Carousel/Tops.tsx'
-import Outerwear from '../components/Carousel/Outerwear.tsx'
-import Bottoms from '../components/Carousel/Bottoms.tsx'
-import Footwear from '../components/Carousel/Footwear.tsx'
-import Accessories from '../components/Carousel/Accessories.tsx'
-import ShuffleButton from '../components/ShuffleButton.tsx'
-import SaveButton from '../components/SaveButton.tsx'
+import Headwear from '@/components/Carousel/Headwear.tsx' // Import your component
+import Tops from '@/components/Carousel/Tops.tsx'
+import Outerwear from '@/components/Carousel/Outerwear.tsx'
+import Bottoms from '@/components/Carousel/Bottoms.tsx'
+import Footwear from '@/components/Carousel/Footwear.tsx'
+import Accessories from '@/components/Carousel/Accessories.tsx'
+import ShuffleButton from '@/components/ShuffleButton.tsx'
+import SaveButton from '@/components/SaveButton.tsx'
 
 // import Header from '../components/Header.tsx'
 
-const logo = require('../assets/images/ootd.png')
+const logo = require('@/assets/images/ootd.png')
 
 export default function App() {
   return (

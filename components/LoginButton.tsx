@@ -11,7 +11,7 @@ type Props = {
 export default function CustomButton({ label, theme }: Props) {
   if (theme === 'login') {
     return (
-      <Link href="/editprofile">
+      <Link href="/wardrobe">
         <View
           style={[
             styles.buttonContainer,

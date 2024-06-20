@@ -1,13 +1,13 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
-import UpdateProfile from '../components/Profile/UpdateProfile'
+import AddClothingItem from '@/components/Wardrobe/AddItem'
 
-export default function Profile() {
+export default function Wardrobe() {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Text> EDIT PROFILE </Text>
-        <UpdateProfile userId={'vin'} />
+        <Text> WARDROBE </Text>
+        <AddClothingItem userId={'vin'} />
       </View>
       <StatusBar style="auto" />
     </View>

@@ -36,7 +36,7 @@ export default function EditProfile({ userId }: { userId: string }) {
     })
   }, [])
 
-  const handleAddItem = () => {
+  const handleSubmit = () => {
     // Reference to the database path for the user's clothing items under 'tops'
     const dbRef = ref(database, `users/${userId}/profile`)
 
@@ -97,7 +97,7 @@ export default function EditProfile({ userId }: { userId: string }) {
           margin: 10,
         }}
       />
-      <Button title="Add Item" onPress={handleAddItem} />
+      <Button title="Update Profile" onPress={handleSubmit} />
     </KeyboardAvoidingView>
   )
 }

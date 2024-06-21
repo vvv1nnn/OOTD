@@ -7,14 +7,10 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native'
-import Headwear from '@/components/Carousel/Headwear'
-import Tops from '@/components/Carousel/Tops'
-import Outerwear from '@/components/Carousel/Outerwear'
-import Bottoms from '@/components/Carousel/Bottoms'
-import Footwear from '@/components/Carousel/Footwear'
-import Accessories from '@/components/Carousel/Accessories'
+
 import ShuffleButton from '@/components/ShuffleButton'
 import SaveButton from '@/components/SaveButton'
+import DisplayClothes from '@/components/Carousel/DisplayClothing'
 
 const logo = require('@/assets/images/ootd.png')
 
@@ -27,17 +23,17 @@ export default function App() {
         </View>
         <View style={styles.container}>
           <Text style={styles.sectionHeader}>Headwear</Text>
-          <Headwear />
+          <DisplayClothes clothingType="headwear" />
           <Text style={styles.sectionHeader}>Accessories</Text>
-          <Accessories />
+          <DisplayClothes clothingType="accessories" />
           <Text style={styles.sectionHeader}>Outerwear</Text>
-          <Outerwear />
+          <DisplayClothes clothingType="outerwear" />
           <Text style={styles.sectionHeader}>Tops</Text>
-          <Tops />
+          <DisplayClothes clothingType="tops" />
           <Text style={styles.sectionHeader}>Bottoms</Text>
-          <Bottoms />
+          <DisplayClothes clothingType="bottoms" />
           <Text style={styles.sectionHeader}>Footwear</Text>
-          <Footwear />
+          <DisplayClothes clothingType="footwear" />
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.addButton}>

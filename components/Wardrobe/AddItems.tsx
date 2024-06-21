@@ -119,9 +119,9 @@ export default function AddClothingItem({ userId }: { userId: string }) {
       quality: 1,
     })
 
-    if (!result.cancelled) {
+    if (!result.canceled) {
       const uri = result.assets[0].uri
-      setImage(uri)
+      setImage(uri as any)
     }
   }
 
@@ -248,7 +248,7 @@ export default function AddClothingItem({ userId }: { userId: string }) {
                 <Text
                   style={[
                     styles.buttonText,
-                    type === 'shoes' && styles.selectedButtonText,
+                    type === 'footwear' && styles.selectedButtonText,
                   ]}
                 >
                   Footwear

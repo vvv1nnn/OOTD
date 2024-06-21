@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useRef } from 'react'
+import React, { FunctionComponent, useRef, useEffect, useState } from 'react'
 import {
   Animated,
   Dimensions,
@@ -7,23 +7,53 @@ import {
   StyleSheet,
   View,
 } from 'react-native'
+import { ref, onValue, off } from 'firebase/database'
 
-const images: string[] = [
-  'https://media.tenor.com/images/3704f2b9b8b66a5747116f436a5e6aba/tenor.gif',
-  'https://i.redd.it/6d162ye9pwkb1.jpg',
-  'https://media.tenor.com/images/425213c8ada06900931c2d0213389ae4/tenor.gif',
-]
+import firebase from '@/firebaseConfig'
+
+// const images: string[] = [
+//   'https://media.tenor.com/images/3704f2b9b8b66a5747116f436a5e6aba/tenor.gif',
+//   'https://i.redd.it/6d162ye9pwkb1.jpg',
+//   'https://media.tenor.com/images/425213c8ada06900931c2d0213389ae4/tenor.gif',
+// ]
 
 const { width } = Dimensions.get('screen')
 
 const Tops: FunctionComponent = () => {
   const animatedValue = useRef(new Animated.Value(0)).current
 
+  const [clothingImages, setClothingImages] = useState<string[]>([])
+
+  useEffect(() => {
+    const clothingRef = ref(firebase.database, 'users/vin/clothing/tops')
+    onValue(clothingRef, (snapshot) => {
+      const data = snapshot.val()
+      if (data) {
+        const imagesArray = Object.values(data).map(
+          (item: any) => item.imageUrl
+        )
+        setClothingImages(imagesArray)
+      } else {
+        setClothingImages([])
+      }
+    })
+
+    return () => {
+      off(clothingRef, 'value') // Clean up listener on component unmount
+    }
+  }, [])
+
+  const renderItem = ({ item }: { item: string }) => (
+    <View style={styles.imageContainer}>
+      <Image style={styles.image} source={{ uri: item }} />
+    </View>
+  )
+
   return (
-    <View style={style.container}>
-      <View style={style.topContainer}>
+    <View style={styles.container}>
+      <View style={styles.topContainer}>
         <Animated.FlatList
-          data={images}
+          data={clothingImages}
           horizontal
           showsHorizontalScrollIndicator={false}
           onScroll={Animated.event(
@@ -32,19 +62,13 @@ const Tops: FunctionComponent = () => {
           )}
           pagingEnabled={true}
           keyExtractor={(_, index) => index.toString()}
-          renderItem={({ item }) => {
-            return (
-              <View style={style.imageContainer}>
-                <Image style={style.image} source={{ uri: item }} />
-              </View>
-            )
-          }}
+          renderItem={renderItem}
         />
       </View>
-      <View style={style.bottomContainer}>
+      <View style={styles.bottomContainer}>
         <FlatList
           horizontal
-          data={images}
+          data={clothingImages}
           keyExtractor={(_, index) => index.toString()}
           renderItem={({ index }) => {
             const inputRange = [
@@ -65,7 +89,7 @@ const Tops: FunctionComponent = () => {
               extrapolate: 'clamp',
             })
             return (
-              <View style={style.dotContainer}>
+              <View style={styles.dotContainer}>
                 <PagingDot color={color} scale={dotScale} />
               </View>
             )
@@ -80,14 +104,14 @@ const PagingDot: FunctionComponent<{ scale; color }> = ({ scale, color }) => {
   return (
     <Animated.View
       style={[
-        style.pagingDot,
+        styles.pagingDot,
         { backgroundColor: color, transform: [{ scale }] },
       ]}
     />
   )
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 3,
   },

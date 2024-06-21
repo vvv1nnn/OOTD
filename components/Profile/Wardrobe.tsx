@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   wardrobe: {
     textAlign: 'center',
     fontWeight: 'bold',
-    fontSize: '20px',
+    fontSize: 20,
   },
 })
 

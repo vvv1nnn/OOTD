@@ -63,11 +63,11 @@ export default function AddClothingItem({ userId }: { userId: string }) {
     const downloadURL = await getDownloadURL(imageRef)
 
     // Save URL to Firebase Realtime Database
-    const newImageRef = push(databaseRef(firebase.database, 'images'))
-    await set(newImageRef, {
-      url: downloadURL,
-      createdAt: serverTimestamp(),
-    })
+    // const newImageRef = push(databaseRef(firebase.database, 'images'))
+    // // await set(newImageRef, {
+    // //   url: downloadURL,
+    // //   createdAt: serverTimestamp(),
+    // // })
 
     setUploading(false)
     setImage(null)

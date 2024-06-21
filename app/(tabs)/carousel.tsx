@@ -7,7 +7,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native'
-import Headwear from '@/components/Carousel/Headwear.tsx'
+import Headwear from '@/components/Carousel/Headwear'
 import Tops from '@/components/Carousel/Tops.tsx'
 import Outerwear from '@/components/Carousel/Outerwear.tsx'
 import Bottoms from '@/components/Carousel/Bottoms.tsx'
@@ -54,6 +54,8 @@ export default function App() {
   )
 }
 
+const buttonSize = 200 // Adjust this value for desired button size
+
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
@@ -80,7 +82,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   buttonContainer: {
-    width: 150,
+    width: buttonSize,
     alignSelf: 'center',
     alignItems: 'center',
     borderRadius: 10,
@@ -88,17 +90,16 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   addButton: {
-    borderWidth: 1,
-    borderRadius: 5,
-    margin: 5,
-    paddingVertical: 10,
-    paddingHorizontal: '25%',
-    alignSelf: 'center', // Center the button
+    width: '100%',
+    height: 40, // Adjust this value for desired button height
     backgroundColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
   },
   addButtonText: {
+    fontSize: 16,
     color: 'white',
     fontWeight: 'bold',
-    textAlign: 'center',
   },
 })

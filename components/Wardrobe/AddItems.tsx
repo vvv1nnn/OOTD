@@ -109,6 +109,22 @@ export default function AddClothingItem({ userId }: { userId: string }) {
           <TouchableOpacity
             style={[
               styles.buttonWrapper,
+              type === 'accessories' && styles.selectedButton,
+            ]}
+            onPress={() => toggleCategory('accessories')}
+          >
+            <Text
+              style={[
+                styles.buttonText,
+                type === 'accessories' && styles.selectedButtonText,
+              ]}
+            >
+              Accessories
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.buttonWrapper,
               type === 'outerwear' && styles.selectedButton,
             ]}
             onPress={() => toggleCategory('outerwear')}

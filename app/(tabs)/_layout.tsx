@@ -3,6 +3,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { Octicons } from '@expo/vector-icons'
 import { FontAwesome6 } from '@expo/vector-icons'
+import { Entypo } from '@expo/vector-icons'
 
 export default () => {
   return (
@@ -13,11 +14,7 @@ export default () => {
           title: '',
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="account-heart"
-              size={24}
-              color="black"
-            />
+            <Entypo name="home" size={24} color="black" />
           ),
         }}
       />

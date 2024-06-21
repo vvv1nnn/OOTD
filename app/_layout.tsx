@@ -1,3 +1,5 @@
+// THIS PAGE ISN'T DOING ANYTHING CURRENTLY
+
 // import TabBar from '@/components/TabBar'
 // import { Tabs } from 'expo-router'
 // import React from 'react'
@@ -33,14 +35,14 @@
 //   )
 // }
 
-import { Stack } from 'expo-router'
+// import { Stack } from 'expo-router'
 
-const StackLayout = () => {
-  return (
-    <Stack>
-      <Stack.Screen name="index" />
-      <Stack.Screen name="editprofile" />
-      <Stack.Screen name="wardrobe" />
-    </Stack>
-  )
-}
+// const StackLayout = () => {
+//   return (
+//     <Stack>
+//       <Stack.Screen name="index" />
+//       <Stack.Screen name="editprofile" />
+//       <Stack.Screen name="wardrobe" />
+//     </Stack>
+//   )
+// }

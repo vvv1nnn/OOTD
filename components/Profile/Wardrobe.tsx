@@ -15,7 +15,7 @@ const ProfileWardrobe = () => {
         <Image source={logo} style={styles.img} />
         <Image source={logo} style={styles.img} />
       </View>
-      <Text style={styles.text}>JEWELERY</Text>
+      <Text style={styles.text}>ACCESSORIES</Text>
       <View style={styles.container}>
         {/* Jewelery */}
         <Image source={logo} style={styles.img} />

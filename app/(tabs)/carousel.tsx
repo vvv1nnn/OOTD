@@ -54,6 +54,8 @@ export default function App() {
   )
 }
 
+const buttonSize = 200 // Adjust this value for desired button size
+
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
@@ -67,7 +69,10 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: 'TYPOGRAPH-PRO-Semi-Bold',
     fontSize: 50,
-    paddingTop: 20,
+    paddingTop: 10,
+
+    top: 0,
+    left: 0,
   },
   imageContainer2: {
     alignItems: 'center',
@@ -80,7 +85,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   buttonContainer: {
-    width: 150,
+    width: buttonSize,
     alignSelf: 'center',
     alignItems: 'center',
     borderRadius: 10,
@@ -88,17 +93,16 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   addButton: {
-    borderWidth: 1,
-    borderRadius: 5,
-    margin: 5,
-    paddingVertical: 10,
-    paddingHorizontal: '25%',
-    alignSelf: 'center', // Center the button
+    width: '100%',
+    height: 40, // Adjust this value for desired button height
     backgroundColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
   },
   addButtonText: {
+    fontSize: 16,
     color: 'white',
     fontWeight: 'bold',
-    textAlign: 'center',
   },
 })

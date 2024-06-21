@@ -69,7 +69,10 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: 'TYPOGRAPH-PRO-Semi-Bold',
     fontSize: 50,
-    paddingTop: 20,
+    paddingTop: 10,
+
+    top: 0,
+    left: 0,
   },
   imageContainer2: {
     alignItems: 'center',

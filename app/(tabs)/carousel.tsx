@@ -7,14 +7,14 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native'
-import Headwear from '@/components/Carousel/Headwear.tsx'
-import Tops from '@/components/Carousel/Tops.tsx'
-import Outerwear from '@/components/Carousel/Outerwear.tsx'
-import Bottoms from '@/components/Carousel/Bottoms.tsx'
-import Footwear from '@/components/Carousel/Footwear.tsx'
-import Accessories from '@/components/Carousel/Accessories.tsx'
-import ShuffleButton from '@/components/ShuffleButton.tsx'
-import SaveButton from '@/components/SaveButton.tsx'
+import Headwear from '@/components/Carousel/Headwear'
+import Tops from '@/components/Carousel/Tops'
+import Outerwear from '@/components/Carousel/Outerwear'
+import Bottoms from '@/components/Carousel/Bottoms'
+import Footwear from '@/components/Carousel/Footwear'
+import Accessories from '@/components/Carousel/Accessories'
+import ShuffleButton from '@/components/ShuffleButton'
+import SaveButton from '@/components/SaveButton'
 
 const logo = require('@/assets/images/ootd.png')
 

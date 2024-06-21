@@ -1,5 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { ref, onValue } from 'firebase/database'
+import firebase from '@/firebaseConfig'
 
 const ProfileName = () => {
   return (

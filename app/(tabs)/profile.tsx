@@ -5,15 +5,17 @@ import ProfileBio from '@/components/Profile/Bio'
 import ProfilePicture from '@/components/Profile/ProfilePicture'
 import ProfileWardrobe from '@/components/Profile/Wardrobe'
 import React from 'react'
+import ShowUserProfile from '@/components/Profile/UserProfile'
 
 export default function profilePage() {
   return (
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.imageContainer}>
-          <ProfilePicture />
+          {/* <ProfilePicture />
           <ProfileName />
-          <ProfileBio />
+          <ProfileBio /> */}
+          <ShowUserProfile />
           <View style={styles.separator} />
           <ProfileWardrobe />
         </View>

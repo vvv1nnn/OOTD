@@ -18,7 +18,7 @@ export default function App() {
     // Animation to increase opacity over 1000ms
     Animated.timing(fadeAnim, {
       toValue: 1,
-      duration: 2000,
+      duration: 3500,
       useNativeDriver: true,
     }).start()
   }, [])
@@ -37,7 +37,7 @@ export default function App() {
       </View>
       <View style={styles.footerContainer}>
         <CustomButton label="LOGIN" theme="login" />
-        <CustomButton label="TEMPORARY " theme="temp" />
+        <CustomButton label="SIGNUP " theme="temp" />
       </View>
       <StatusBar style="auto" />
     </View>

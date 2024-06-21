@@ -9,7 +9,6 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
-  Button,
   ScrollView,
   SafeAreaView,
 } from 'react-native'
@@ -39,7 +38,6 @@ export default function AddClothingItem({ userId }: { userId: string }) {
   const [description, setDescription] = useState('')
   const [image, setImage] = useState(null)
   const [type, setType] = useState('')
-  const [imageUrl, setImageUrl] = useState('')
   const [uploading, setUploading] = useState(false)
 
   const handleAddItem = async () => {
@@ -119,9 +117,9 @@ export default function AddClothingItem({ userId }: { userId: string }) {
       quality: 1,
     })
 
-    if (!result.canceled) {
+    if (!result.cancelled) {
       const uri = result.assets[0].uri
-      setImage(uri as any)
+      setImage(uri)
     }
   }
 
@@ -134,7 +132,12 @@ export default function AddClothingItem({ userId }: { userId: string }) {
             {uploading && (
               <Text style={styles.uploadingText}>Uploading...</Text>
             )}
-            <Button title="Pick an image" onPress={pickImage} />
+            <TouchableOpacity
+              style={styles.selectImageButton}
+              onPress={pickImage}
+            >
+              <Text style={styles.selectImageButtonText}>Select Image</Text>
+            </TouchableOpacity>
             <TextInput
               value={itemName}
               onChangeText={(text) => setItemName(text)}
@@ -167,6 +170,22 @@ export default function AddClothingItem({ userId }: { userId: string }) {
                   ]}
                 >
                   Headwear
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.buttonWrapper,
+                  type === 'accessories' && styles.selectedButton,
+                ]}
+                onPress={() => toggleCategory('accessories')}
+              >
+                <Text
+                  style={[
+                    styles.buttonText,
+                    type === 'accessories' && styles.selectedButtonText,
+                  ]}
+                >
+                  Accessories
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
@@ -315,9 +334,18 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-  temp: {
+  selectImageButton: {
+    borderWidth: 1,
+    borderRadius: 5,
+    marginVertical: 10,
+    paddingVertical: 10,
+    paddingHorizontal: '15%',
+    backgroundColor: 'black',
+  },
+  selectImageButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
     textAlign: 'center',
-    margin: 10,
   },
   image: {
     width: 200,

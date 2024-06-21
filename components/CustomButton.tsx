@@ -11,36 +11,20 @@ type Props = {
 export default function CustomButton({ label, theme }: Props) {
   if (theme === 'login') {
     return (
-      <Link href="/editprofile">
+      <Link href="/login">
         <View style={[styles.buttonContainer]}>
-          <View style={[styles.button, { backgroundColor: '#fff' }]}>
-            <Text style={[styles.buttonLabel, { color: '#25292e' }]}>
-              {label}
-            </Text>
-            <FontAwesome
-              name="arrow-circle-right"
-              size={18}
-              color="#25292e"
-              style={styles.buttonIcon}
-            />
+          <View style={[styles.button]}>
+            <Text style={[styles.buttonLabel]}>{label}</Text>
           </View>
         </View>
       </Link>
     )
   } else {
     return (
-      <Link href="/wardrobe">
+      <Link href="/signup">
         <View style={[styles.buttonContainer]}>
-          <View style={[styles.button, { backgroundColor: '#fff' }]}>
-            <Text style={[styles.buttonLabel, { color: '#25292e' }]}>
-              {label}
-            </Text>
-            <FontAwesome
-              name="arrow-circle-right"
-              size={18}
-              color="#25292e"
-              style={styles.buttonIcon}
-            />
+          <View style={[styles.button]}>
+            <Text style={[styles.buttonLabel]}>{label}</Text>
           </View>
         </View>
       </Link>
@@ -65,25 +49,26 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
+    marginTop: 10,
     borderColor: '#474747',
     borderRadius: 10,
   },
   button: {
-    borderRadius: 10,
-    borderColor: 'black',
-    borderStyle: 'solid',
+    borderRadius: 8, // Adjusted to match the LoginPage button
+    backgroundColor: 'black', // Adjusted to match the LoginPage button
     width: '100%',
     height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
+    marginTop: 10,
   },
   buttonIcon: {
     paddingLeft: 6,
   },
   buttonLabel: {
-    color: 'black',
-    fontSize: 20,
+    fontSize: 16, // Adjusted to match the LoginPage button text size
+    color: 'white', // Adjusted to match the LoginPage button text color
+    fontWeight: 'bold', // Adjusted to match the LoginPage button text weight
   },
 })

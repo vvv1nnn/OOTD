@@ -1,16 +1,25 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import UpdateProfile from '../../components/Profile/UpdateProfile'
 
 export default function Profile() {
   return (
-    <View style={styles.container}>
-      <View style={styles.imageContainer}>
-        <Text style={styles.profile}> EDIT PROFILE </Text>
-        <UpdateProfile userId={'vin'} />
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <View style={styles.imageContainer}>
+          <Text style={styles.profile}> EDIT PROFILE </Text>
+          <UpdateProfile userId={'vin'} />
+        </View>
+        <StatusBar style="auto" />
       </View>
-      <StatusBar style="auto" />
-    </View>
+    </TouchableWithoutFeedback>
   )
 }
 

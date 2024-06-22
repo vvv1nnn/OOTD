@@ -14,6 +14,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native'
+import { useRouter } from 'expo-router' // Import the useRouter hook
 import firebase from '../../firebaseConfig'
 import { ref, set, get } from 'firebase/database'
 
@@ -27,6 +28,8 @@ export default function EditProfile({ userId }: { userId: string }) {
   const [firstName, setFirstName] = useState('')
   const [email, setEmail] = useState('')
   const [bio, setBio] = useState('')
+
+  const router = useRouter() // Initialize the router
 
   useEffect(() => {
     const dbRef = ref(firebase.database, `users/${userId}/profile`)
@@ -64,54 +67,65 @@ export default function EditProfile({ userId }: { userId: string }) {
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.container}
       >
-        <View style={styles.imageContainer}>
-          <Image
-            source={require('@/assets/images/SADCAT.png')} // Replace with your image path
-            style={styles.image}
-          />
-        </View>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View>
+            <View style={styles.imageContainer}>
+              <Image
+                source={require('@/assets/images/SADCAT.png')} // Replace with your image path
+                style={styles.image}
+              />
+            </View>
 
-        <View style={styles.sectionContainer}>
-          <Text style={styles.label}>First Name</Text>
-          <TextInput
-            value={firstName}
-            onChangeText={(text) => setFirstName(text)}
-            placeholder="First Name"
-            placeholderTextColor="darkgray"
-            style={styles.input}
-          />
-          <View style={styles.separator} />
-        </View>
+            <View style={styles.sectionContainer}>
+              <Text style={styles.label}>First Name</Text>
+              <TextInput
+                value={firstName}
+                onChangeText={(text) => setFirstName(text)}
+                placeholder="First Name"
+                placeholderTextColor="darkgray"
+                style={styles.input}
+              />
+              <View style={styles.separator} />
+            </View>
 
-        <View style={styles.sectionContainer}>
-          <Text style={styles.label}>Email</Text>
-          <TextInput
-            value={email}
-            onChangeText={(text) => setEmail(text)}
-            placeholder="Email"
-            placeholderTextColor="darkgray"
-            inputMode="email"
-            style={styles.input}
-          />
-          <View style={styles.separator} />
-        </View>
+            <View style={styles.sectionContainer}>
+              <Text style={styles.label}>Email</Text>
+              <TextInput
+                value={email}
+                onChangeText={(text) => setEmail(text)}
+                placeholder="Email"
+                placeholderTextColor="darkgray"
+                inputMode="email"
+                style={styles.input}
+              />
+              <View style={styles.separator} />
+            </View>
 
-        <View style={styles.sectionContainer}>
-          <Text style={styles.label}>Bio</Text>
-          <TextInput
-            value={bio}
-            onChangeText={(text) => setBio(text)}
-            placeholder="Bio"
-            placeholderTextColor="darkgray"
-            multiline={true}
-            style={styles.textArea}
-          />
-          <View style={styles.separator} />
-        </View>
+            <View style={styles.sectionContainer}>
+              <Text style={styles.label}>Bio</Text>
+              <TextInput
+                value={bio}
+                onChangeText={(text) => setBio(text)}
+                placeholder="Bio"
+                placeholderTextColor="darkgray"
+                multiline={true}
+                style={styles.textArea}
+              />
+              <View style={styles.separator} />
+            </View>
 
-        <TouchableOpacity style={styles.addButton} onPress={handleSubmit}>
-          <Text style={styles.addButtonText}>Save Profile</Text>
-        </TouchableOpacity>
+            <TouchableOpacity style={styles.addButton} onPress={handleSubmit}>
+              <Text style={styles.addButtonText}>Save Profile</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[styles.addButton, { marginTop: 10 }]}
+              onPress={() => router.push('/profile')} // Navigate back to ProfilePage
+            >
+              <Text style={styles.addButtonText}>Back to Profile</Text>
+            </TouchableOpacity>
+          </View>
+        </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     </ScrollView>
   )
@@ -128,9 +142,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   image: {
-    width: 100, // Adjust width and height as needed
+    width: 100,
     height: 100,
-    borderRadius: 50, // Make it circular
+    borderRadius: 50,
   },
   sectionContainer: {
     marginBottom: 15,
@@ -164,17 +178,23 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   addButton: {
+    width: '100%', // Set the width to be 100% of the container
     borderWidth: 1,
     borderRadius: 5,
     margin: 5,
     paddingVertical: 10,
     paddingHorizontal: '25%',
-    alignSelf: 'center', // Center the button
+    alignSelf: 'center',
     backgroundColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   addButtonText: {
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  backButton: {
+    backgroundColor: 'gray', // Different background for the back button
   },
 })

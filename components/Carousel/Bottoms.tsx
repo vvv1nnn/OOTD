@@ -1,20 +1,11 @@
 import React from 'react'
-import { Image, StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Image } from 'react-native'
 
-const images: string[] = [
-  'https://media.tenor.com/images/3704f2b9b8b66a5747116f436a5e6aba/tenor.gif',
-  'https://i.redd.it/6d162ye9pwkb1.jpg',
-  'https://media.tenor.com/images/425213c8ada06900931c2d0213389ae4/tenor.gif',
-]
-
-const Bottoms = () => {
-  // Assuming you want to display the first image statically
-  const staticImage = images[0]
-
+const Bottoms = ({ image }) => {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image style={styles.image} source={{ uri: staticImage }} />
+        <Image style={styles.image} source={{ uri: image }} />
       </View>
     </View>
   )
@@ -22,11 +13,12 @@ const Bottoms = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 3,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   imageContainer: {
-    justifyContent: 'flex-end',
-    paddingBottom: 5,
+    justifyContent: 'center',
     alignItems: 'center',
   },
   image: {

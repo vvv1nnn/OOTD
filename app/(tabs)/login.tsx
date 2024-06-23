@@ -1,3 +1,4 @@
+import { useRouter } from 'expo-router'
 import React, { useState } from 'react'
 import {
   View,
@@ -9,17 +10,23 @@ import {
   Keyboard,
 } from 'react-native'
 
-const LoginPage = () => {
+const LoginPage = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const handleLogin = () => {
-    // Implement your sign-up logic here (e.g., send data to server, validate inputs)
-    console.log('Signing up with:', { email, password })
-    // Reset fields after sign-up
+    // Implement your login logic here (e.g., send data to server, validate inputs)
+    console.log('Logging in with:', { email, password })
+    // Reset fields after login (this is just for demonstration)
     setEmail('')
     setPassword('')
   }
+
+  const navigateToSignUp = () => {
+    navigation.navigate('signup') // Navigate to SignUpPage
+  }
+
+  const router = useRouter()
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -46,6 +53,18 @@ const LoginPage = () => {
           />
           <TouchableOpacity style={styles.button} onPress={handleLogin}>
             <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.button, { marginTop: 10 }]}
+            onPress={() => router.push('/signup')} // Navigate back to ProfilePage
+          >
+            <TouchableOpacity
+              onPress={() => router.push('/login')} // Navigate back to ProfilePage
+            >
+              <Text style={styles.login}>
+                Already signed up? Press to Login
+              </Text>
+            </TouchableOpacity>
           </TouchableOpacity>
         </View>
       </View>
@@ -87,7 +106,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   button: {
-    width: '50%',
+    width: '70%',
     height: 40,
     backgroundColor: 'black',
     justifyContent: 'center',
@@ -99,6 +118,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'white',
     fontWeight: 'bold',
+  },
+  login: {
+    textDecorationLine: 'underline',
+    margin: 10,
   },
 })
 

@@ -1,3 +1,4 @@
+import { router } from 'expo-router'
 import React, { useState } from 'react'
 import {
   View,
@@ -9,7 +10,7 @@ import {
   Keyboard,
 } from 'react-native'
 
-const SignUpPage = () => {
+const SignUpPage = ({ navigation }) => {
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
@@ -23,6 +24,10 @@ const SignUpPage = () => {
     setUsername('')
     setEmail('')
     setPassword('')
+  }
+
+  const navigateToLogin = () => {
+    navigation.navigate('login') // Navigate to LogInPage
   }
 
   return (
@@ -67,6 +72,11 @@ const SignUpPage = () => {
           <TouchableOpacity style={styles.button} onPress={handleSignUp}>
             <Text style={styles.buttonText}>Sign Up</Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => router.push('/login')} // Navigate back to ProfilePage
+          >
+            <Text style={styles.login}>Already signed up? Press to Login</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -103,7 +113,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderWidth: 1,
     borderColor: 'black',
-    borderRadius: 8,
+    borderRadius: 1,
     paddingHorizontal: 10,
     marginBottom: 10,
   },
@@ -120,6 +130,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'white',
     fontWeight: 'bold',
+  },
+  login: {
+    textDecorationLine: 'underline',
+    margin: 10,
   },
 })
 

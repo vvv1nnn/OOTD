@@ -7,10 +7,12 @@ import {
   Text,
 } from 'react-native'
 import { useRouter } from 'expo-router'
+import { StatusBar } from 'expo-status-bar'
 import ProfileName from '@/components/Profile/Username'
 import ProfileBio from '@/components/Profile/Bio'
 import ProfilePicture from '@/components/Profile/ProfilePicture'
 import ProfileWardrobe from '@/components/Profile/Wardrobe'
+import ShowUserProfile from '@/components/Profile/UserProfile'
 
 export default function ProfilePage() {
   const router = useRouter()
@@ -34,14 +36,16 @@ export default function ProfilePage() {
         </View>
         <View style={[styles.separator]} />
         <View style={styles.profileContainer}>
-          <ProfilePicture />
+          {/*<ProfilePicture />
           <ProfileName />
-          <ProfileBio />
+          <ProfileBio /> */}
+          <ShowUserProfile />
           <View style={styles.separator} />
           <ProfileWardrobe />
 
           <View style={styles.separator} />
         </View>
+        <StatusBar style="auto" />
       </View>
     </ScrollView>
   )

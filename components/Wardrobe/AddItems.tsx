@@ -32,6 +32,7 @@ interface ClothingItem {
   type: string
   description: string
   imageUrl: string
+  // createdAt: number
 }
 
 export default function AddClothingItem({ userId }: { userId: string }) {
@@ -83,6 +84,7 @@ export default function AddClothingItem({ userId }: { userId: string }) {
       type: type,
       description: description,
       imageUrl: downloadURL,
+      // createdAt: serverTimestamp()
     }
 
     set(newItemRef, newItem)

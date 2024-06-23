@@ -2,12 +2,8 @@ import { Tabs } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { Octicons } from '@expo/vector-icons'
-
-import { MaterialIcons } from '@expo/vector-icons'
-
 import { FontAwesome6 } from '@expo/vector-icons'
 import { Entypo } from '@expo/vector-icons'
-
 
 export default () => {
   return (
@@ -18,25 +14,7 @@ export default () => {
           title: '',
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-
-            <MaterialIcons name="dynamic-feed" size={24} color="black" />
-
             <Entypo name="home" size={24} color="black" />
-
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="carousel"
-        options={{
-          title: '',
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-
-            <Octicons name="plus-circle" size={24} color="black" />
-
-            <Ionicons name="person-circle-sharp" size={24} color="black" />
-
           ),
         }}
       />
@@ -50,7 +28,16 @@ export default () => {
           ),
         }}
       />
-
+      <Tabs.Screen
+        name="carousel"
+        options={{
+          title: '',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Octicons name="plus-circle" size={24} color="black" />
+          ),
+        }}
+      />
       <Tabs.Screen
         name="wardrobe"
         options={{

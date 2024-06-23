@@ -1,5 +1,5 @@
 import { View } from 'react-native'
-import EditProfile from '../../components/Profile/EditProfile'
+import EditProfile from '@/components/Profile/EditProfile'
 
 export default function UpdateProfile({ userId }) {
   return (

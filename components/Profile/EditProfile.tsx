@@ -14,7 +14,6 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native'
-import { useRouter } from 'expo-router'
 import firebase from '../../firebaseConfig'
 import { ref, set, get } from 'firebase/database'
 
@@ -28,8 +27,6 @@ export default function EditProfile({ userId }: { userId: string }) {
   const [firstName, setFirstName] = useState('')
   const [email, setEmail] = useState('')
   const [bio, setBio] = useState('')
-
-  const router = useRouter()
 
   useEffect(() => {
     const dbRef = ref(firebase.database, `users/${userId}/profile`)
@@ -67,65 +64,54 @@ export default function EditProfile({ userId }: { userId: string }) {
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.container}
       >
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={styles.contentContainer}>
-            <View style={styles.imageContainer}>
-              <Image
-                source={require('@/assets/images/SADCAT.png')}
-                style={styles.image}
-              />
-            </View>
+        <View style={styles.imageContainer}>
+          <Image
+            source={require('@/assets/images/SADCAT.png')} // Replace with your image path
+            style={styles.image}
+          />
+        </View>
 
-            <View style={styles.sectionContainer}>
-              <Text style={styles.label}>First Name</Text>
-              <TextInput
-                value={firstName}
-                onChangeText={(text) => setFirstName(text)}
-                placeholder="First Name"
-                placeholderTextColor="darkgray"
-                style={styles.input}
-              />
-              <View style={[styles.separator, styles.blackSeparator]} />
-            </View>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.label}>First Name</Text>
+          <TextInput
+            value={firstName}
+            onChangeText={(text) => setFirstName(text)}
+            placeholder="First Name"
+            placeholderTextColor="darkgray"
+            style={styles.input}
+          />
+          <View style={styles.separator} />
+        </View>
 
-            <View style={styles.sectionContainer}>
-              <Text style={styles.label}>Email</Text>
-              <TextInput
-                value={email}
-                onChangeText={(text) => setEmail(text)}
-                placeholder="Email"
-                placeholderTextColor="darkgray"
-                inputMode="email"
-                style={styles.input}
-              />
-              <View style={[styles.separator, styles.blackSeparator]} />
-            </View>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.label}>Email</Text>
+          <TextInput
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+            placeholder="Email"
+            placeholderTextColor="darkgray"
+            inputMode="email"
+            style={styles.input}
+          />
+          <View style={styles.separator} />
+        </View>
 
-            <View style={styles.sectionContainer}>
-              <Text style={styles.label}>Bio</Text>
-              <TextInput
-                value={bio}
-                onChangeText={(text) => setBio(text)}
-                placeholder="Bio"
-                placeholderTextColor="darkgray"
-                multiline={true}
-                style={styles.textArea}
-              />
-              <View style={[styles.separator]} />
-            </View>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.label}>Bio</Text>
+          <TextInput
+            value={bio}
+            onChangeText={(text) => setBio(text)}
+            placeholder="Bio"
+            placeholderTextColor="darkgray"
+            multiline={true}
+            style={styles.textArea}
+          />
+          <View style={styles.separator} />
+        </View>
 
-            <TouchableOpacity style={styles.addButton} onPress={handleSubmit}>
-              <Text style={styles.addButtonText}>Save Profile</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={[styles.addButton, styles.backButton]}
-              onPress={() => router.push('/profile')}
-            >
-              <Text style={styles.addButtonText}>Back to Profile</Text>
-            </TouchableOpacity>
-          </View>
-        </TouchableWithoutFeedback>
+        <TouchableOpacity style={styles.addButton} onPress={handleSubmit}>
+          <Text style={styles.addButtonText}>Save Profile</Text>
+        </TouchableOpacity>
       </KeyboardAvoidingView>
     </ScrollView>
   )
@@ -137,23 +123,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 20,
   },
-  contentContainer: {
-    flex: 1,
-    width: '100%', // Ensure the container takes the full width
-  },
   imageContainer: {
     alignItems: 'center',
     marginBottom: 20,
   },
   image: {
-    width: 100,
+    width: 100, // Adjust width and height as needed
     height: 100,
-    borderRadius: 50,
+    borderRadius: 50, // Make it circular
   },
   sectionContainer: {
-    marginBottom: 10,
-    width: '100%', // Ensure the container takes the full width
-    paddingHorizontal: 10, // Add horizontal padding to adjust separator width
+    marginBottom: 15,
   },
   label: {
     fontSize: 16,
@@ -170,35 +150,31 @@ const styles = StyleSheet.create({
   },
   textArea: {
     height: 100,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderWidth: 0,
+    borderColor: '#ccc',
     paddingLeft: 10,
     paddingTop: 10,
     textAlignVertical: 'top',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
   },
   separator: {
-    height: 1, // Increase height for better visibility
-    width: '150%', // Increase width to extend beyond the sectionContainer
-    alignSelf: 'center', // Center align the separator
-    marginHorizontal: -15, // Adjust margins to cover the padding of sectionContainer
+    height: 0,
+    backgroundColor: '#ccc',
+    marginVertical: 10,
   },
-
   addButton: {
-    width: '100%', // Ensure the button takes the full width
     borderWidth: 1,
     borderRadius: 5,
-    marginVertical: 10,
+    margin: 5,
     paddingVertical: 10,
+    paddingHorizontal: '25%',
+    alignSelf: 'center', // Center the button
     backgroundColor: 'black',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   addButtonText: {
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
-  },
-  backButton: {
-    backgroundColor: 'black',
   },
 })

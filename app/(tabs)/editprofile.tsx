@@ -1,15 +1,15 @@
-import React from 'react'
 import {
   StyleSheet,
   Text,
   View,
+  Image,
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
-import UpdateProfile from '../components/Profile/UpdateProfile.tsx'
+import UpdateProfile from '../../components/Profile/UpdateProfile'
 
-export default function EditProfile({ navigation }) {
+export default function Profile() {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>

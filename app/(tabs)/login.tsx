@@ -51,20 +51,17 @@ const LoginPage = ({ navigation }) => {
             onChangeText={setPassword}
             secureTextEntry={true}
           />
-          <TouchableOpacity style={styles.button} onPress={handleLogin}>
+
+          <TouchableOpacity
+            style={[styles.button, { marginTop: 10 }]}
+            onPress={() => router.push('/feed')} // Navigate to Feed page
+          >
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.button, { marginTop: 10 }]}
-            onPress={() => router.push('/signup')} // Navigate back to ProfilePage
+            onPress={() => router.push('/signup')} // Navigate to SignUp page
           >
-            <TouchableOpacity
-              onPress={() => router.push('/login')} // Navigate back to ProfilePage
-            >
-              <Text style={styles.login}>
-                Already signed up? Press to Login
-              </Text>
-            </TouchableOpacity>
+            <Text style={styles.login}>Haven't signed up? Press to Signup</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -88,6 +85,10 @@ const styles = StyleSheet.create({
     left: 0,
     padding: 10,
   },
+  login: {
+    textDecorationLine: 'underline',
+    margin: 10,
+  },
   formContainer: {
     width: '100%',
     alignItems: 'center',
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderWidth: 1,
     borderColor: 'black',
-    borderRadius: 1,
+    borderRadius: 8,
     paddingHorizontal: 10,
     marginBottom: 10,
   },

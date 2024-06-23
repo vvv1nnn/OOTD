@@ -14,7 +14,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native'
-import { useRouter } from 'expo-router' // Import the useRouter hook
+import { useRouter } from 'expo-router'
 import firebase from '../../firebaseConfig'
 import { ref, set, get } from 'firebase/database'
 
@@ -29,7 +29,7 @@ export default function EditProfile({ userId }: { userId: string }) {
   const [email, setEmail] = useState('')
   const [bio, setBio] = useState('')
 
-  const router = useRouter() // Initialize the router
+  const router = useRouter()
 
   useEffect(() => {
     const dbRef = ref(firebase.database, `users/${userId}/profile`)
@@ -68,10 +68,10 @@ export default function EditProfile({ userId }: { userId: string }) {
         style={styles.container}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View>
+          <View style={styles.contentContainer}>
             <View style={styles.imageContainer}>
               <Image
-                source={require('@/assets/images/SADCAT.png')} // Replace with your image path
+                source={require('@/assets/images/SADCAT.png')}
                 style={styles.image}
               />
             </View>
@@ -85,7 +85,7 @@ export default function EditProfile({ userId }: { userId: string }) {
                 placeholderTextColor="darkgray"
                 style={styles.input}
               />
-              <View style={styles.separator} />
+              <View style={[styles.separator, styles.blackSeparator]} />
             </View>
 
             <View style={styles.sectionContainer}>
@@ -98,7 +98,7 @@ export default function EditProfile({ userId }: { userId: string }) {
                 inputMode="email"
                 style={styles.input}
               />
-              <View style={styles.separator} />
+              <View style={[styles.separator, styles.blackSeparator]} />
             </View>
 
             <View style={styles.sectionContainer}>
@@ -111,7 +111,7 @@ export default function EditProfile({ userId }: { userId: string }) {
                 multiline={true}
                 style={styles.textArea}
               />
-              <View style={styles.separator} />
+              <View style={[styles.separator]} />
             </View>
 
             <TouchableOpacity style={styles.addButton} onPress={handleSubmit}>
@@ -119,8 +119,8 @@ export default function EditProfile({ userId }: { userId: string }) {
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={[styles.addButton, { marginTop: 10 }]}
-              onPress={() => router.push('/profile')} // Navigate back to ProfilePage
+              style={[styles.addButton, styles.backButton]}
+              onPress={() => router.push('/profile')}
             >
               <Text style={styles.addButtonText}>Back to Profile</Text>
             </TouchableOpacity>
@@ -137,6 +137,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 20,
   },
+  contentContainer: {
+    flex: 1,
+    width: '100%', // Ensure the container takes the full width
+  },
   imageContainer: {
     alignItems: 'center',
     marginBottom: 20,
@@ -147,7 +151,9 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   sectionContainer: {
-    marginBottom: 15,
+    marginBottom: 10,
+    width: '100%', // Ensure the container takes the full width
+    paddingHorizontal: 10, // Add horizontal padding to adjust separator width
   },
   label: {
     fontSize: 16,
@@ -164,27 +170,25 @@ const styles = StyleSheet.create({
   },
   textArea: {
     height: 100,
-    borderWidth: 0,
-    borderColor: '#ccc',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
     paddingLeft: 10,
     paddingTop: 10,
     textAlignVertical: 'top',
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
   },
   separator: {
-    height: 0,
-    backgroundColor: '#ccc',
-    marginVertical: 10,
+    height: 1, // Increase height for better visibility
+    width: '150%', // Increase width to extend beyond the sectionContainer
+    alignSelf: 'center', // Center align the separator
+    marginHorizontal: -15, // Adjust margins to cover the padding of sectionContainer
   },
+
   addButton: {
-    width: '100%', // Set the width to be 100% of the container
+    width: '100%', // Ensure the button takes the full width
     borderWidth: 1,
     borderRadius: 5,
-    margin: 5,
+    marginVertical: 10,
     paddingVertical: 10,
-    paddingHorizontal: '25%',
-    alignSelf: 'center',
     backgroundColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',
@@ -195,6 +199,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   backButton: {
-    backgroundColor: 'gray', // Different background for the back button
+    backgroundColor: 'black',
   },
 })

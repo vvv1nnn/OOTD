@@ -1,3 +1,4 @@
+import { useRouter } from 'expo-router'
 import React, { useState } from 'react'
 import {
   View,
@@ -9,17 +10,23 @@ import {
   Keyboard,
 } from 'react-native'
 
-const LoginPage = () => {
+const LoginPage = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const handleLogin = () => {
-    // Implement your sign-up logic here (e.g., send data to server, validate inputs)
-    console.log('Signing up with:', { email, password })
-    // Reset fields after sign-up
+    // Implement your login logic here (e.g., send data to server, validate inputs)
+    console.log('Logging in with:', { email, password })
+    // Reset fields after login (this is just for demonstration)
     setEmail('')
     setPassword('')
   }
+
+  const navigateToSignUp = () => {
+    navigation.navigate('signup') // Navigate to SignUpPage
+  }
+
+  const router = useRouter()
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -44,8 +51,17 @@ const LoginPage = () => {
             onChangeText={setPassword}
             secureTextEntry={true}
           />
-          <TouchableOpacity style={styles.button} onPress={handleLogin}>
+
+          <TouchableOpacity
+            style={[styles.button, { marginTop: 10 }]}
+            onPress={() => router.push('/feed')} // Navigate to Feed page
+          >
             <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => router.push('/signup')} // Navigate to SignUp page
+          >
+            <Text style={styles.login}>Haven't signed up? Press to Signup</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -69,6 +85,10 @@ const styles = StyleSheet.create({
     left: 0,
     padding: 10,
   },
+  login: {
+    textDecorationLine: 'underline',
+    margin: 10,
+  },
   formContainer: {
     width: '100%',
     alignItems: 'center',
@@ -82,12 +102,12 @@ const styles = StyleSheet.create({
     height: 40,
     borderWidth: 1,
     borderColor: 'black',
-    borderRadius: 1,
+    borderRadius: 8,
     paddingHorizontal: 10,
     marginBottom: 10,
   },
   button: {
-    width: '50%',
+    width: '70%',
     height: 40,
     backgroundColor: 'black',
     justifyContent: 'center',
@@ -99,6 +119,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'white',
     fontWeight: 'bold',
+  },
+  login: {
+    textDecorationLine: 'underline',
+    margin: 10,
   },
 })
 

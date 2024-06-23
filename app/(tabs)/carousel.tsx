@@ -1,4 +1,6 @@
-import React from 'react'
+// App.js
+
+import React, { useState } from 'react'
 import {
   StyleSheet,
   Text,
@@ -6,6 +8,7 @@ import {
   ScrollView,
   SafeAreaView,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native'
 import Headwear from '@/components/Carousel/Headwear'
 import Tops from '@/components/Carousel/Tops'
@@ -13,40 +16,121 @@ import Outerwear from '@/components/Carousel/Outerwear'
 import Bottoms from '@/components/Carousel/Bottoms'
 import Footwear from '@/components/Carousel/Footwear'
 import Accessories from '@/components/Carousel/Accessories'
-import ShuffleButton from '@/components/ShuffleButton'
-import SaveButton from '@/components/SaveButton'
 
-const logo = require('@/assets/images/ootd.png')
+const App = () => {
+  // Image arrays for each category
+  const headwearImages = [
+    'https://media.tenor.com/images/3704f2b9b8b66a5747116f436a5e6aba/tenor.gif',
+    'https://i.redd.it/6d162ye9pwkb1.jpg',
+    'https://media.tenor.com/images/425213c8ada06900931c2d0213389ae4/tenor.gif',
+  ]
 
-export default function App() {
+  const topsImages = [
+    'https://media.tenor.com/images/3704f2b9b8b66a5747116f436a5e6aba/tenor.gif',
+    'https://i.redd.it/6d162ye9pwkb1.jpg',
+    'https://media.tenor.com/images/425213c8ada06900931c2d0213389ae4/tenor.gif',
+  ]
+
+  const outerwearImages = [
+    'https://media.tenor.com/images/3704f2b9b8b66a5747116f436a5e6aba/tenor.gif',
+    'https://i.redd.it/6d162ye9pwkb1.jpg',
+    'https://media.tenor.com/images/425213c8ada06900931c2d0213389ae4/tenor.gif',
+  ]
+
+  const bottomsImages = [
+    'https://media.tenor.com/images/3704f2b9b8b66a5747116f436a5e6aba/tenor.gif',
+    'https://i.redd.it/6d162ye9pwkb1.jpg',
+    'https://media.tenor.com/images/425213c8ada06900931c2d0213389ae4/tenor.gif',
+  ]
+
+  const footwearImages = [
+    'https://media.tenor.com/images/3704f2b9b8b66a5747116f436a5e6aba/tenor.gif',
+    'https://i.redd.it/6d162ye9pwkb1.jpg',
+    'https://media.tenor.com/images/425213c8ada06900931c2d0213389ae4/tenor.gif',
+  ]
+
+  const accessoriesImages = [
+    'https://media.tenor.com/images/3704f2b9b8b66a5747116f436a5e6aba/tenor.gif',
+    'https://i.redd.it/6d162ye9pwkb1.jpg',
+    'https://media.tenor.com/images/425213c8ada06900931c2d0213389ae4/tenor.gif',
+  ]
+
+  // State for currently displayed image in each category
+  const [currentHeadwear, setCurrentHeadwear] = useState(headwearImages[0])
+  const [currentTops, setCurrentTops] = useState(topsImages[0])
+  const [currentOuterwear, setCurrentOuterwear] = useState(outerwearImages[0])
+  const [currentBottoms, setCurrentBottoms] = useState(bottomsImages[0])
+  const [currentFootwear, setCurrentFootwear] = useState(footwearImages[0])
+  const [currentAccessories, setCurrentAccessories] = useState(
+    accessoriesImages[0]
+  )
+
+  // Shuffle function to select a random image
+  const getRandomImage = (images) => {
+    const randomIndex = Math.floor(Math.random() * images.length)
+    return images[randomIndex]
+  }
+
+  // Shuffle handler
+  const handleShuffle = () => {
+    setCurrentHeadwear(getRandomImage(headwearImages))
+    setCurrentTops(getRandomImage(topsImages))
+    setCurrentOuterwear(getRandomImage(outerwearImages))
+    setCurrentBottoms(getRandomImage(bottomsImages))
+    setCurrentFootwear(getRandomImage(footwearImages))
+    setCurrentAccessories(getRandomImage(accessoriesImages)) // Ensure this is working
+  }
+
   return (
     <SafeAreaView style={styles.safeArea}>
-      <ScrollView>
-        <View style={styles.imageContainer2}>
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <View style={styles.imageContainer}>
           <Text style={styles.text}>OOTD.</Text>
         </View>
-        <View style={styles.container}>
-          <Text style={styles.sectionHeader}>Headwear</Text>
-          <Headwear />
-          <Text style={styles.sectionHeader}>Accessories</Text>
-          <Accessories />
-          <Text style={styles.sectionHeader}>Outerwear</Text>
-          <Outerwear />
-          <Text style={styles.sectionHeader}>Tops</Text>
-          <Tops />
-          <Text style={styles.sectionHeader}>Bottoms</Text>
-          <Bottoms />
-          <Text style={styles.sectionHeader}>Footwear</Text>
-          <Footwear />
+
+        {/* First row of components */}
+        <View style={styles.row}>
+          <View style={styles.component}>
+            <Text style={styles.sectionHeader}>Headwear</Text>
+            <Headwear image={currentHeadwear} />
+          </View>
+          <View style={styles.component}>
+            <Text style={styles.sectionHeader}>Accessories</Text>
+            <Accessories image={currentAccessories} />
+          </View>
         </View>
+
+        {/* Second row of components */}
+        <View style={styles.row}>
+          <View style={styles.component}>
+            <Text style={styles.sectionHeader}>Outerwear</Text>
+            <Outerwear image={currentOuterwear} />
+          </View>
+          <View style={styles.component}>
+            <Text style={styles.sectionHeader}>Tops</Text>
+            <Tops image={currentTops} />
+          </View>
+        </View>
+
+        {/* Third row of components */}
+        <View style={styles.row}>
+          <View style={styles.component}>
+            <Text style={styles.sectionHeader}>Bottoms</Text>
+            <Bottoms image={currentBottoms} />
+          </View>
+          <View style={styles.component}>
+            <Text style={styles.sectionHeader}>Footwear</Text>
+            <Footwear image={currentFootwear} />
+          </View>
+        </View>
+
+        {/* Buttons row */}
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.addButton}>
-            <Text style={styles.addButtonText}>Shuffle</Text>
+          <TouchableOpacity style={styles.button} onPress={handleShuffle}>
+            <Text style={styles.buttonText}>Shuffle</Text>
           </TouchableOpacity>
-        </View>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.addButton}>
-            <Text style={styles.addButtonText}>Save</Text>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>Save</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -54,55 +138,63 @@ export default function App() {
   )
 }
 
-const buttonSize = 200 // Adjust this value for desired button size
+const windowWidth = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: '#fff',
   },
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
+  scrollViewContent: {
     alignItems: 'center',
+  },
+  imageContainer: {
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    marginTop: 20,
   },
   text: {
     fontFamily: 'TYPOGRAPH-PRO-Semi-Bold',
     fontSize: 50,
-    paddingTop: 10,
-
-    top: 0,
-    left: 0,
+    padding: 5,
   },
-  imageContainer2: {
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
+    paddingHorizontal: 10,
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  component: {
+    flex: 1,
+    minWidth: '40%', // Adjust as needed based on your design
     alignItems: 'center',
-    backgroundColor: '#fff',
   },
   sectionHeader: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginTop: 20,
     marginBottom: 10,
+    textAlign: 'center', // Ensure text is centered horizontally
   },
   buttonContainer: {
-    width: buttonSize,
-    alignSelf: 'center',
-    alignItems: 'center',
-    borderRadius: 10,
-    overflow: 'hidden',
-    marginBottom: 10,
-  },
-  addButton: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
     width: '100%',
-    height: 40, // Adjust this value for desired button height
+    paddingHorizontal: 20,
+    marginBottom: 20,
+  },
+  button: {
     backgroundColor: 'black',
-    justifyContent: 'center',
-    alignItems: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     borderRadius: 8,
   },
-  addButtonText: {
-    fontSize: 16,
+  buttonText: {
     color: 'white',
+    fontSize: 16,
     fontWeight: 'bold',
   },
 })
+
+export default App

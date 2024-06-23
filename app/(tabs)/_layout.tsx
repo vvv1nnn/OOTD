@@ -37,28 +37,17 @@ export default () => {
           ),
         }}
       />
-
       <Tabs.Screen
-        name="wardrobe"
+        name="friends"
         options={{
           title: '',
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
-              name="dresser-outline"
+              name="account-multiple-plus"
               size={24}
               color="black"
             />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="editprofile"
-        options={{
-          title: '',
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person-circle-sharp" size={24} color="black" />
           ),
         }}
       />

@@ -12,12 +12,16 @@ import ProfileBio from '@/components/Profile/Bio'
 import ProfilePicture from '@/components/Profile/ProfilePicture'
 import ProfileWardrobe from '@/components/Profile/Wardrobe'
 
+import ShowUserProfile from '@/components/Profile/UserProfile'
+
+
 export default function ProfilePage() {
   const router = useRouter()
 
   return (
     <ScrollView>
       <View style={styles.container}>
+
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.button}
@@ -35,8 +39,13 @@ export default function ProfilePage() {
         <View style={[styles.separator]} />
         <View style={styles.profileContainer}>
           <ProfilePicture />
+
+        <View style={styles.imageContainer}>
+          {/* <ProfilePicture />
+
           <ProfileName />
-          <ProfileBio />
+          <ProfileBio /> */}
+          <ShowUserProfile />
           <View style={styles.separator} />
           <ProfileWardrobe />
 

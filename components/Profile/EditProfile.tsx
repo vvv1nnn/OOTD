@@ -85,7 +85,7 @@ export default function EditProfile({ userId }: { userId: string }) {
                 placeholderTextColor="darkgray"
                 style={styles.input}
               />
-              <View style={[styles.separator, styles.blackSeparator]} />
+              <View style={[styles.separator]} />
             </View>
 
             <View style={styles.sectionContainer}>
@@ -98,7 +98,7 @@ export default function EditProfile({ userId }: { userId: string }) {
                 inputMode="email"
                 style={styles.input}
               />
-              <View style={[styles.separator, styles.blackSeparator]} />
+              <View style={[styles.separator]} />
             </View>
 
             <View style={styles.sectionContainer}>

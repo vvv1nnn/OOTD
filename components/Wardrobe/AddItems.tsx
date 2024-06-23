@@ -240,14 +240,14 @@ export default function AddClothingItem({ userId }: { userId: string }) {
               <TouchableOpacity
                 style={[
                   styles.buttonWrapper,
-                  type === 'shoes' && styles.selectedButton,
+                  type === 'footwear' && styles.selectedButton,
                 ]}
-                onPress={() => toggleCategory('shoes')}
+                onPress={() => toggleCategory('footwear')}
               >
                 <Text
                   style={[
                     styles.buttonText,
-                    type === 'shoes' && styles.selectedButtonText,
+                    type === 'footwear' && styles.selectedButtonText,
                   ]}
                 >
                   Footwear

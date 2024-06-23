@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import {
   StyleSheet,
   Text,
@@ -6,7 +6,22 @@ import {
   ScrollView,
   SafeAreaView,
   TouchableOpacity,
+  Button,
 } from 'react-native'
+import ViewShot, { captureRef } from 'react-native-view-shot'
+import {
+  getStorage,
+  ref as storageRef,
+  uploadBytes,
+  getDownloadURL,
+} from 'firebase/storage'
+import {
+  ref as databaseRef,
+  push,
+  set,
+  serverTimestamp,
+} from 'firebase/database'
+import firebase from '@/firebaseConfig'
 
 import ShuffleButton from '@/components/ShuffleButton'
 import SaveButton from '@/components/SaveButton'
@@ -15,13 +30,55 @@ import DisplayClothes from '@/components/Carousel/DisplayClothing'
 const logo = require('@/assets/images/ootd.png')
 
 export default function App() {
+  const viewShotRef = useRef(null)
+  const [uploading, setUploading] = useState(false)
+  const username = 'vin' //placeholder until auth is implemented
+
+  const captureAndUpload = async () => {
+    if (!viewShotRef.current) return
+
+    setUploading(true)
+
+    try {
+      // Capture the screenshot
+      const uri = await captureRef(viewShotRef, {
+        format: 'png',
+        quality: 1,
+      })
+
+      const response = await fetch(uri)
+      const blob = await response.blob()
+
+      // Upload the screenshot to Firebase Storage
+      const imageRef = storageRef(
+        firebase.storage,
+        `posts/${new Date().toISOString()}.png`
+      )
+      await uploadBytes(imageRef, blob)
+      const downloadURL = await getDownloadURL(imageRef)
+
+      // Save post data to Firebase Realtime Database
+      const newPostRef = push(databaseRef(firebase.database, 'posts'))
+      await set(newPostRef, {
+        imageUrl: downloadURL,
+        username,
+        createdAt: serverTimestamp(),
+        likes: 0,
+      })
+    } catch (error) {
+      console.error('Error capturing and uploading screenshot: ', error)
+    } finally {
+      setUploading(false)
+    }
+  }
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView>
         <View style={styles.imageContainer2}>
           <Text style={styles.text}>OOTD.</Text>
         </View>
-        <View style={styles.container}>
+        <ViewShot ref={viewShotRef} style={styles.container}>
           <Text style={styles.sectionHeader}>Headwear</Text>
           <DisplayClothes clothingType="headwear" />
           <Text style={styles.sectionHeader}>Accessories</Text>
@@ -34,15 +91,21 @@ export default function App() {
           <DisplayClothes clothingType="bottoms" />
           <Text style={styles.sectionHeader}>Footwear</Text>
           <DisplayClothes clothingType="footwear" />
-        </View>
+        </ViewShot>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.addButton}>
             <Text style={styles.addButtonText}>Shuffle</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.addButton}>
-            <Text style={styles.addButtonText}>Save</Text>
+          <TouchableOpacity
+            style={styles.addButton}
+            onPress={captureAndUpload}
+            disabled={uploading}
+          >
+            <Text style={styles.addButtonText}>
+              {uploading ? 'Uploading...' : 'Post'}
+            </Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

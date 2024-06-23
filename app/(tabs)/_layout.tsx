@@ -38,18 +38,22 @@ export default () => {
           ),
         }}
       />
-      <Tabs.Screen
-        name="profile"
+      {/* <Tabs.Screen
+        name="wardrobe"
         options={{
           title: '',
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person-circle-sharp" size={24} color="black" />
+            <MaterialCommunityIcons
+              name="dresser-outline"
+              size={24}
+              color="black"
+            />
           ),
         }}
-      />
-      <Tabs.Screen
-        name="friends"
+      /> */}
+      {/* <Tabs.Screen
+        name="editprofile"
         options={{
           title: '',
           headerShown: false,
@@ -57,7 +61,7 @@ export default () => {
             <FontAwesome6 name="user-pen" size={24} color="black" />
           ),
         }}
-      />
+      /> */}
       <Tabs.Screen
         name="friends"
         options={{

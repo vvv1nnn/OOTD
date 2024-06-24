@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Image } from 'react-native'
 
-const Accessories = ({ image }) => {
+const Tops = ({ image }) => {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Accessories
+export default Tops

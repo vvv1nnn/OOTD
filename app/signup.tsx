@@ -1,3 +1,4 @@
+import { router } from 'expo-router'
 import React, { useState } from 'react'
 import {
   View,
@@ -9,16 +10,24 @@ import {
   Keyboard,
 } from 'react-native'
 
-const LoginPage = () => {
+const SignUpPage = ({ navigation }) => {
+  const [name, setName] = useState('')
+  const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleLogin = () => {
+  const handleSignUp = () => {
     // Implement your sign-up logic here (e.g., send data to server, validate inputs)
-    console.log('Signing up with:', { email, password })
+    console.log('Signing up with:', { name, username, email, password })
     // Reset fields after sign-up
+    setName('')
+    setUsername('')
     setEmail('')
     setPassword('')
+  }
+
+  const navigateToLogin = () => {
+    navigation.navigate('login') // Navigate to LogInPage
   }
 
   return (
@@ -26,7 +35,23 @@ const LoginPage = () => {
       <View style={styles.container}>
         <Text style={styles.text}>OOTD.</Text>
         <View style={styles.formContainer}>
-          <Text style={styles.title}>LOGIN</Text>
+          <Text style={styles.title}>REGISTER</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Name"
+            placeholderTextColor="grey"
+            value={name}
+            onChangeText={setName}
+            autoCapitalize="words"
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Username"
+            placeholderTextColor="grey"
+            value={username}
+            onChangeText={setUsername}
+            autoCapitalize="none"
+          />
           <TextInput
             style={styles.input}
             placeholder="Email"
@@ -44,8 +69,13 @@ const LoginPage = () => {
             onChangeText={setPassword}
             secureTextEntry={true}
           />
-          <TouchableOpacity style={styles.button} onPress={handleLogin}>
-            <Text style={styles.buttonText}>Login</Text>
+          <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+            <Text style={styles.buttonText}>Sign Up</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => router.push('/login')} // Navigate back to ProfilePage
+          >
+            <Text style={styles.login}>Already signed up? Press to Login</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -56,10 +86,10 @@ const LoginPage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#fff',
     padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   text: {
     fontFamily: 'TYPOGRAPH-PRO-Semi-Bold',
@@ -72,6 +102,7 @@ const styles = StyleSheet.create({
   formContainer: {
     width: '100%',
     alignItems: 'center',
+    marginTop: 100, // Adjust this value as needed for spacing
   },
   title: {
     fontSize: 24,
@@ -100,6 +131,10 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
   },
+  login: {
+    textDecorationLine: 'underline',
+    margin: 10,
+  },
 })
 
-export default LoginPage
+export default SignUpPage

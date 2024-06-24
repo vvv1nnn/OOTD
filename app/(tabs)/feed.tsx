@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   StyleSheet,
   Text,
@@ -6,32 +6,49 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
+  ListRenderItem,
 } from 'react-native'
+import { ref, onValue, query, orderByChild, update } from 'firebase/database'
 
-// Dummy data for the feed
-const dummyData = [
-  {
-    id: '1',
-    username: 'mintswagger42069',
-    avatar: require('@/assets/images/looweegee.jpg'), // Use require for local images
-    image: require('@/assets/images/SADCAT.png'),
-    caption: 'erydey cri',
-    likes: 10,
-  },
-  {
-    id: '2',
-    username: 'bananastick100',
-    avatar: require('@/assets/images/SADCAT.png'), // Use require for local images
-    image: require('@/assets/images/looweegee.jpg'),
-    caption: 'i cry i cry',
-    likes: 5,
-  },
-]
+import firebase from '@/firebaseConfig'
 
-const Feed = () => {
-  const [data, setData] = useState(dummyData)
+// Define the type for a Post
+interface Post {
+  id: string
+  createdAt: number
+  imageUrl: string
+  likes: number
+  username: string
+  avatar?: string
+  caption?: string
+}
 
-  const handleLike = (postId) => {
+const Feed: React.FC = () => {
+  const [data, setData] = useState<Post[]>([])
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const postsRef = query(
+        ref(firebase.database, 'posts'),
+        orderByChild('createdAt')
+      )
+      onValue(postsRef, (snapshot) => {
+        if (snapshot.exists()) {
+          const fetchedData: Post[] = []
+          snapshot.forEach((childSnapshot) => {
+            fetchedData.push({ id: childSnapshot.key!, ...childSnapshot.val() })
+          })
+          // Reverse the array to get the latest posts first
+          setData(fetchedData.reverse())
+        }
+      })
+    }
+
+    fetchPosts()
+  }, [])
+
+  const handleLike = (postId: string) => {
+    // Update the likes in the local state
     const newData = data.map((post) => {
       if (post.id === postId) {
         return { ...post, likes: post.likes + 1 }
@@ -39,24 +56,17 @@ const Feed = () => {
       return post
     })
     setData(newData)
+
+    // Update the likes in the database
+    const postToUpdate = newData.find((post) => post.id === postId)
+    if (postToUpdate) {
+      const postRef = ref(firebase.database, `posts/${postId}`)
+      update(postRef, { likes: postToUpdate.likes })
+    }
   }
 
-  const renderItem = ({ item }) => (
-    <View style={styles.postContainer}>
-      <View style={styles.header}>
-        <Image source={item.avatar} style={styles.avatar} />
-        <Text style={styles.username}>{item.username}</Text>
-      </View>
-      <Image source={item.image} style={styles.postImage} />
-      <Text style={styles.caption}>{item.caption}</Text>
-      <Text style={styles.likes}>{item.likes} likes</Text>
-      <TouchableOpacity
-        onPress={() => handleLike(item.id)}
-        style={styles.likeButton}
-      >
-        <Text style={styles.likeButtonText}>Like</Text>
-      </TouchableOpacity>
-    </View>
+  const renderItem: ListRenderItem<Post> = ({ item }) => (
+    <PostItem item={item} onLike={handleLike} />
   )
 
   return (
@@ -68,6 +78,28 @@ const Feed = () => {
     />
   )
 }
+
+interface PostItemProps {
+  item: Post
+  onLike: (postId: string) => void
+}
+
+const PostItem: React.FC<PostItemProps> = ({ item, onLike }) => (
+  <View style={styles.postContainer}>
+    <View style={styles.header}>
+      {item.avatar && (
+        <Image source={{ uri: item.avatar }} style={styles.avatar} />
+      )}
+      <Text style={styles.username}>{item.username}</Text>
+    </View>
+    <Image source={{ uri: item.imageUrl }} style={styles.postImage} />
+    {item.caption && <Text style={styles.caption}>{item.caption}</Text>}
+    <Text style={styles.likes}>{item.likes} likes</Text>
+    <TouchableOpacity onPress={() => onLike(item.id)} style={styles.likeButton}>
+      <Text style={styles.likeButtonText}>Like</Text>
+    </TouchableOpacity>
+  </View>
+)
 
 const styles = StyleSheet.create({
   feed: {

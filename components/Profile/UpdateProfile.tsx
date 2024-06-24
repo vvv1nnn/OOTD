@@ -1,5 +1,6 @@
 import { View } from 'react-native'
 import EditProfile from '../../components/Profile/EditProfile'
+import ProfileEdit from '../../components/Profile/ProfileEdit'
 
 export default function UpdateProfile({ userId }) {
   return (
@@ -10,7 +11,7 @@ export default function UpdateProfile({ userId }) {
         alignItems: 'center',
       }}
     >
-      <EditProfile userId={userId} />
+      <ProfileEdit userId={userId} />
     </View>
   )
 }

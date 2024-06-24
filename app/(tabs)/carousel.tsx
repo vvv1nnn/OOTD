@@ -164,9 +164,6 @@ const App = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
-        <View style={styles.imageContainer}>
-          <Text style={styles.text}>OOTD.</Text>
-        </View>
         <ViewShot ref={viewShotRef}>
           {/* First row of components */}
           <View style={styles.row}>
@@ -245,6 +242,7 @@ const styles = StyleSheet.create({
     fontSize: 50,
     padding: 5,
   },
+
   row: {
     flexDirection: 'row',
     justifyContent: 'space-around',

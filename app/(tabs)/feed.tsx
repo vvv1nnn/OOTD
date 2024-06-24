@@ -102,6 +102,7 @@ const PostItem: React.FC<PostItemProps> = ({ item, onLike }) => (
     <TouchableOpacity onPress={() => onLike(item.id)} style={styles.likeButton}>
       <Text style={styles.likeButtonText}>Like</Text>
     </TouchableOpacity>
+    <View style={styles.separator} />
   </View>
 )
 
@@ -110,16 +111,22 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: 'white',
   },
+  separator: {
+    height: 1.5,
+    backgroundColor: 'black', // Change to a darker color for better contrast
+    width: '100%', // Slightly reduce width to account for padding
+    marginTop: 30,
+  },
   postContainer: {
     marginBottom: 20,
     backgroundColor: 'white',
-    padding: 15,
     borderRadius: 10,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 10,
+    textAlign: 'center',
   },
   avatar: {
     width: 50,
@@ -130,6 +137,7 @@ const styles = StyleSheet.create({
   username: {
     fontSize: 16,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
   postImage: {
     width: '100%',

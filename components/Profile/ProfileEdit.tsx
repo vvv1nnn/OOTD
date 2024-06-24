@@ -57,9 +57,9 @@ export default function EditProfile({ userId }) {
   }
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.contentContainer}>
+        <View style={styles.content}>
           <View style={styles.imageContainer}>
             <Image
               source={require('@/assets/images/SADCAT.png')}
@@ -75,9 +75,8 @@ export default function EditProfile({ userId }) {
               placeholder="First Name"
               placeholderTextColor="darkgray"
               style={styles.input}
-              accessibilityLabel="First Name" // Accessibility label
+              accessibilityLabel="First Name"
             />
-            <View style={styles.separator} />
           </View>
 
           <View style={styles.sectionContainer}>
@@ -89,9 +88,8 @@ export default function EditProfile({ userId }) {
               placeholderTextColor="darkgray"
               keyboardType="email-address"
               style={styles.input}
-              accessibilityLabel="Email" // Accessibility label
+              accessibilityLabel="Email"
             />
-            <View style={styles.separator} />
           </View>
 
           <View style={styles.sectionContainer}>
@@ -103,9 +101,8 @@ export default function EditProfile({ userId }) {
               placeholderTextColor="darkgray"
               multiline={true}
               style={styles.textArea}
-              accessibilityLabel="Bio" // Accessibility label
+              accessibilityLabel="Bio"
             />
-            <View style={styles.separator} />
           </View>
 
           <TouchableOpacity style={styles.addButton} onPress={handleSubmit}>
@@ -114,7 +111,7 @@ export default function EditProfile({ userId }) {
 
           <TouchableOpacity
             style={[styles.addButton, styles.backButton]}
-            onPress={() => router.push('/profile')}
+            onPress={() => router.push('/carousel')}
           >
             <Text style={styles.addButtonText}>Back to Profile</Text>
           </TouchableOpacity>
@@ -126,12 +123,13 @@ export default function EditProfile({ userId }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
     padding: 20,
   },
-  contentContainer: {
-    flex: 1,
+  content: {
     width: '100%',
   },
   imageContainer: {
@@ -161,7 +159,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ccc',
   },
   textArea: {
-    height: 50,
+    height: 20,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
     textAlignVertical: 'top',
@@ -170,14 +168,14 @@ const styles = StyleSheet.create({
     height: 1,
     width: '100%',
     alignSelf: 'center',
-    marginHorizontal: -15,
+    marginVertical: 5,
   },
   addButton: {
     width: '100%',
     borderWidth: 1,
     borderRadius: 3,
     marginVertical: 10,
-    paddingVertical: 10,
+    paddingVertical: 7,
     backgroundColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',

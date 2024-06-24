@@ -31,7 +31,9 @@ const AppTabs = () => {
             return <Octicons name={iconName} size={24} color={color} />
           }
         },
-        tabBarLabel: () => null, // Hide labels
+        tabBarShowLabel: false, // Hide labels
+        tabBarActiveTintColor: '#505050', // Change the color of the active tab icon
+        tabBarInactiveTintColor: 'black', // Change the color of the inactive tab icon
       })}
     >
       <Tab.Screen name="Feed" component={Feed} />

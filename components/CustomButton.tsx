@@ -1,6 +1,4 @@
-import { StyleSheet, View, Pressable, Text } from 'react-native'
-import FontAwesome from '@expo/vector-icons/FontAwesome'
-import { PropsWithChildren } from 'react'
+import { StyleSheet, View, Pressable, Text, Platform } from 'react-native'
 import { Link } from 'expo-router'
 
 type Props = {
@@ -12,9 +10,9 @@ export default function CustomButton({ label, theme }: Props) {
   if (theme === 'login') {
     return (
       <Link href="/login">
-        <View style={[styles.buttonContainer]}>
-          <View style={[styles.button]}>
-            <Text style={[styles.buttonLabel]}>{label}</Text>
+        <View style={[styles.buttonContainer, styles.shadow]}>
+          <View style={styles.button}>
+            <Text style={styles.buttonLabel}>{label}</Text>
           </View>
         </View>
       </Link>
@@ -22,9 +20,9 @@ export default function CustomButton({ label, theme }: Props) {
   } else {
     return (
       <Link href="/signup">
-        <View style={[styles.buttonContainer]}>
-          <View style={[styles.button]}>
-            <Text style={[styles.buttonLabel]}>{label}</Text>
+        <View style={[styles.buttonContainer, styles.shadow]}>
+          <View style={styles.button}>
+            <Text style={styles.buttonLabel}>{label}</Text>
           </View>
         </View>
       </Link>
@@ -32,7 +30,7 @@ export default function CustomButton({ label, theme }: Props) {
   }
 
   return (
-    <View style={styles.buttonContainer}>
+    <View style={[styles.buttonContainer, styles.shadow]}>
       <Pressable
         style={styles.button}
         onPress={() => alert('You pressed a button.')}
@@ -45,30 +43,40 @@ export default function CustomButton({ label, theme }: Props) {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    width: 150,
-    height: 40,
+    width: 200,
+    height: 30,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 10,
+    marginTop: 20,
     borderColor: '#474747',
     borderRadius: 10,
   },
   button: {
-    borderRadius: 8, // Adjusted to match the LoginPage button
-    backgroundColor: 'black', // Adjusted to match the LoginPage button
+    borderRadius: 3,
+    backgroundColor: 'black',
     width: '100%',
     height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
-    marginTop: 10,
-  },
-  buttonIcon: {
-    paddingLeft: 6,
+    marginBottom: 100,
   },
   buttonLabel: {
-    fontSize: 16, // Adjusted to match the LoginPage button text size
-    color: 'white', // Adjusted to match the LoginPage button text color
-    fontWeight: 'bold', // Adjusted to match the LoginPage button text weight
+    fontSize: 16,
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  shadow: {
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.6,
+        shadowRadius: 2,
+      },
+      android: {
+        elevation: 4,
+      },
+    }),
   },
 })

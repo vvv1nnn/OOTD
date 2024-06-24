@@ -64,11 +64,11 @@ export default function AddClothingItem({ userId }: { userId: string }) {
     const downloadURL = await getDownloadURL(imageRef)
 
     // Save URL to Firebase Realtime Database
-    const newImageRef = push(databaseRef(firebase.database, 'images'))
-    await set(newImageRef, {
-      url: downloadURL,
-      createdAt: serverTimestamp(),
-    })
+    // const newImageRef = push(databaseRef(firebase.database, 'images'))
+    // // await set(newImageRef, {
+    // //   url: downloadURL,
+    // //   createdAt: serverTimestamp(),
+    // // })
 
     setUploading(false)
     setImage(null)
@@ -120,9 +120,9 @@ export default function AddClothingItem({ userId }: { userId: string }) {
       quality: 1,
     })
 
-    if (!result.cancelled) {
+    if (!result.canceled) {
       const uri = result.assets[0].uri
-      setImage(uri)
+      setImage(uri as any)
     }
   }
 

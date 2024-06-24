@@ -1,7 +1,12 @@
 import React from 'react'
 import { StyleSheet, View, Image } from 'react-native'
 
-const Headwear = ({ image }) => {
+type Props = {
+  clothingType: string
+  randomNumber: number
+}
+
+const DisplayClothing = ({ image }) => {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -28,4 +33,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Headwear
+export default DisplayClothing

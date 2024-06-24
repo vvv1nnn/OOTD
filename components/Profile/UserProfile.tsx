@@ -42,7 +42,7 @@ export default function ShowUserProfile() {
       {profileData !== null ? (
         <>
           <ProfilePicture />
-          <Text style={styles.username}>vvv1nnn</Text>
+          <Text style={styles.username}>cri eri dey</Text>
           <Text style={styles.bio}>{profileData.firstName}</Text>
           <Text style={styles.bio}>{profileData.bio}</Text>
         </>

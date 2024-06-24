@@ -1,81 +1,46 @@
-import { Tabs } from 'expo-router'
-import { Ionicons } from '@expo/vector-icons'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
-import { Octicons } from '@expo/vector-icons'
-import { FontAwesome6 } from '@expo/vector-icons'
-import { Entypo } from '@expo/vector-icons'
+import React from 'react'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import Feed from './feed' // Assuming Feed component is in a separate file
+import ProfileScreen from './profile' // Placeholder for profile screen
+import CarouselScreen from './carousel' // Placeholder for carousel screen
+import { Entypo, Ionicons, Octicons } from '@expo/vector-icons'
 
-export default () => {
+const Tab = createBottomTabNavigator()
+
+const AppTabs = () => {
   return (
-    <Tabs>
-      <Tabs.Screen
-        name="feed"
-        options={{
-          title: '',
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <Entypo name="home" size={24} color="black" />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: '',
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person-circle-sharp" size={24} color="black" />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="carousel"
-        options={{
-          title: '',
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <Octicons name="plus-circle" size={24} color="black" />
-          ),
-        }}
-      />
-      {/* <Tabs.Screen
-        name="wardrobe"
-        options={{
-          title: '',
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="dresser-outline"
-              size={24}
-              color="black"
-            />
-          ),
-        }}
-      /> */}
-      {/* <Tabs.Screen
-        name="editprofile"
-        options={{
-          title: '',
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome6 name="user-pen" size={24} color="black" />
-          ),
-        }}
-      /> */}
-      <Tabs.Screen
-        name="friends"
-        options={{
-          title: '',
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="account-multiple-plus"
-              size={24}
-              color="black"
-            />
-          ),
-        }}
-      />
-    </Tabs>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarStyle: {
+          height: 70, // Adjust tab bar height
+          borderTopWidth: 0, // Remove top border
+          elevation: 0, // Android shadow
+          shadowOpacity: 0.1, // iOS shadow
+        },
+        tabBarIcon: ({ color, size }) => {
+          let iconName
+
+          if (route.name === 'Feed') {
+            iconName = 'home'
+            return <Entypo name={iconName} size={24} color={color} />
+          } else if (route.name === 'Profile') {
+            iconName = 'person-circle-sharp'
+            return <Ionicons name={iconName} size={24} color={color} />
+          } else if (route.name === 'Carousel') {
+            iconName = 'plus-circle'
+            return <Octicons name={iconName} size={24} color={color} />
+          }
+        },
+        tabBarShowLabel: false, // Hide labels
+        tabBarActiveTintColor: '#505050', // Change the color of the active tab icon
+        tabBarInactiveTintColor: 'black', // Change the color of the inactive tab icon
+      })}
+    >
+      <Tab.Screen name="Feed" component={Feed} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name="Carousel" component={CarouselScreen} />
+    </Tab.Navigator>
   )
 }
+
+export default AppTabs

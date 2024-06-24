@@ -92,9 +92,13 @@ const PostItem: React.FC<PostItemProps> = ({ item, onLike }) => (
       )}
       <Text style={styles.username}>{item.username}</Text>
     </View>
-    <Image source={{ uri: item.imageUrl }} style={styles.postImage} />
-    {item.caption && <Text style={styles.caption}>{item.caption}</Text>}
-    <Text style={styles.likes}>{item.likes} likes</Text>
+    <View>
+      <Image source={{ uri: item.imageUrl }} style={styles.postImage} />
+    </View>
+    <View>
+      {item.caption && <Text style={styles.caption}>{item.caption}</Text>}
+      <Text style={styles.likes}>{item.likes} likes</Text>
+    </View>
     <TouchableOpacity onPress={() => onLike(item.id)} style={styles.likeButton}>
       <Text style={styles.likeButtonText}>Like</Text>
     </TouchableOpacity>
@@ -104,10 +108,11 @@ const PostItem: React.FC<PostItemProps> = ({ item, onLike }) => (
 const styles = StyleSheet.create({
   feed: {
     padding: 20,
+    backgroundColor: 'white',
   },
   postContainer: {
     marginBottom: 20,
-    backgroundColor: '#f8f8f8',
+    backgroundColor: 'white',
     padding: 15,
     borderRadius: 10,
   },
@@ -128,8 +133,15 @@ const styles = StyleSheet.create({
   },
   postImage: {
     width: '100%',
-    height: 300,
+    height: 650,
     borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5, // For Android
+    borderWidth: 1,
+    borderColor: 'white',
   },
   caption: {
     fontSize: 14,
@@ -139,9 +151,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     marginBottom: 10,
+    textAlign: 'center',
+    marginTop: 10,
   },
   likeButton: {
-    backgroundColor: '#3498db',
+    backgroundColor: 'black',
     padding: 10,
     borderRadius: 5,
   },

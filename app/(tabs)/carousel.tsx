@@ -6,7 +6,7 @@ import {
   ScrollView,
   SafeAreaView,
   TouchableOpacity,
-  Button,
+  Alert,
 } from 'react-native'
 import ViewShot, { captureRef } from 'react-native-view-shot'
 import {
@@ -64,9 +64,10 @@ export default function App() {
         username,
         createdAt: serverTimestamp(),
         likes: 0,
-      })
+      }).then(() => Alert.alert('Success', 'Post uploaded successfully!'))
     } catch (error) {
       console.error('Error capturing and uploading screenshot: ', error)
+      Alert.alert('Error', 'Failed to post. Please try again later.')
     } finally {
       setUploading(false)
     }

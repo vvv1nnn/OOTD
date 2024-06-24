@@ -1,4 +1,3 @@
-import { useRouter } from 'expo-router'
 import React, { useState } from 'react'
 import {
   View,
@@ -9,10 +8,12 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native'
+import { useRouter } from 'expo-router' // Import useRouter from expo-router
 
-const LoginPage = ({ navigation }) => {
+const LoginPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const router = useRouter()
 
   const handleLogin = () => {
     // Implement your login logic here (e.g., send data to server, validate inputs)
@@ -20,13 +21,13 @@ const LoginPage = ({ navigation }) => {
     // Reset fields after login (this is just for demonstration)
     setEmail('')
     setPassword('')
+    // Navigate to Feed page
+    router.push('/feed')
   }
 
   const navigateToSignUp = () => {
-    navigation.navigate('signup') // Navigate to SignUpPage
+    router.push('/signup') // Navigate to SignUp page
   }
-
-  const router = useRouter()
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -54,12 +55,12 @@ const LoginPage = ({ navigation }) => {
 
           <TouchableOpacity
             style={[styles.button, { marginTop: 10 }]}
-            onPress={() => router.push('/feed')} // Navigate to Feed page
+            onPress={handleLogin} // Call handleLogin on button press
           >
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => router.push('/signup')} // Navigate to SignUp page
+            onPress={navigateToSignUp} // Call navigateToSignUp on button press
           >
             <Text style={styles.login}>Haven't signed up? Press to Signup</Text>
           </TouchableOpacity>
@@ -102,17 +103,17 @@ const styles = StyleSheet.create({
     height: 40,
     borderWidth: 1,
     borderColor: 'black',
-    borderRadius: 8,
+    borderRadius: 3,
     paddingHorizontal: 10,
     marginBottom: 10,
   },
   button: {
     width: '70%',
-    height: 40,
+    height: 30,
     backgroundColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 8,
+    borderRadius: 3,
     marginTop: 20,
   },
   buttonText: {

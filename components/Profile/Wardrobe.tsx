@@ -12,7 +12,7 @@ const ProfileWardrobe = () => {
         onPress={() => router.push('/wardrobe')}
         style={styles.addButton} // Corrected style prop
       >
-        <Text style={styles.addButtonText}>+Add to Wardrobe</Text>
+        <Text style={styles.addButtonText}>Add to Wardrobe</Text>
       </TouchableOpacity>
       <Text style={styles.text}>HEADWEAR</Text>
       <View style={styles.container}>
@@ -63,14 +63,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   container: {
-    paddingTop: 20,
+    paddingTop: 10,
     flexDirection: 'row',
     justifyContent: 'space-around', // Ensure items are spread out
     width: '100%', // Ensure it takes up full width
   },
   text: {
     textAlign: 'center',
-    paddingTop: 20,
+    paddingTop: 10, // Reduced from 20 to decrease space between sections
     fontWeight: 'bold',
   },
   img: {
@@ -81,14 +81,23 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 20, // Removed 'px' for compatibility with React Native
-    marginBottom: 10,
+    marginBottom: 5, // Reduced from 10 to decrease space below wardrobe text
   },
-
+  addButton: {
+    width: '100%',
+    borderWidth: 1,
+    borderRadius: 3,
+    marginVertical: 5, // Reduced from 10 to decrease vertical margin
+    paddingVertical: 5,
+    paddingHorizontal: 21, // Increased horizontal padding for longer button
+    backgroundColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   addButtonText: {
-    color: 'black',
+    color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
-    textDecorationLine: 'underline',
   },
 })
 

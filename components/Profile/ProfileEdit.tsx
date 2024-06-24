@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   sectionContainer: {
     marginBottom: 10,
     width: '100%',
-    paddingHorizontal: 10,
+    paddingHorizontal: 30,
   },
   label: {
     fontSize: 16,
@@ -156,17 +156,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   input: {
-    height: 40,
+    height: 20,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
-    paddingLeft: 10,
   },
   textArea: {
-    height: 100,
+    height: 50,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
-    paddingLeft: 10,
-    paddingTop: 10,
     textAlignVertical: 'top',
   },
   separator: {
@@ -178,7 +175,7 @@ const styles = StyleSheet.create({
   addButton: {
     width: '100%',
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 3,
     marginVertical: 10,
     paddingVertical: 10,
     backgroundColor: 'black',

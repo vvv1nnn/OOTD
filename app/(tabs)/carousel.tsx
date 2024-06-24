@@ -164,15 +164,19 @@ const App = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <View>
+          <Text style={styles.profile}> OUTFIT RANDOMISER </Text>
+        </View>
+
         <ViewShot ref={viewShotRef}>
           {/* First row of components */}
           <View style={styles.row}>
             <View style={styles.component}>
-              <Text style={styles.sectionHeader}>Headwear</Text>
+              <Text style={styles.sectionHeader}>HEADWEAR</Text>
               <DisplayClothing image={currentHeadwear} />
             </View>
             <View style={styles.component}>
-              <Text style={styles.sectionHeader}>Accessories</Text>
+              <Text style={styles.sectionHeader}>ACCESSORIES</Text>
               <DisplayClothing image={currentAccessories} />
             </View>
           </View>
@@ -180,11 +184,11 @@ const App = () => {
           {/* Second row of components */}
           <View style={styles.row}>
             <View style={styles.component}>
-              <Text style={styles.sectionHeader}>Outerwear</Text>
+              <Text style={styles.sectionHeader}>OUTERWEAR</Text>
               <DisplayClothing image={currentOuterwear} />
             </View>
             <View style={styles.component}>
-              <Text style={styles.sectionHeader}>Tops</Text>
+              <Text style={styles.sectionHeader}>TOPS</Text>
               <DisplayClothing image={currentTops} />
             </View>
           </View>
@@ -192,11 +196,11 @@ const App = () => {
           {/* Third row of components */}
           <View style={styles.row}>
             <View style={styles.component}>
-              <Text style={styles.sectionHeader}>Bottoms</Text>
+              <Text style={styles.sectionHeader}>BOTTOMS</Text>
               <DisplayClothing image={currentBottoms} />
             </View>
             <View style={styles.component}>
-              <Text style={styles.sectionHeader}>Footwear</Text>
+              <Text style={styles.sectionHeader}>FOOTWEAR</Text>
               <DisplayClothing image={currentFootwear} />
             </View>
           </View>
@@ -227,57 +231,66 @@ const windowWidth = Dimensions.get('window').width
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
+  },
+  profile: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    paddingBottom: 20,
   },
   scrollViewContent: {
     alignItems: 'center',
+    paddingVertical: 20,
   },
-  imageContainer: {
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    marginTop: 20,
+  randomiser: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    textAlign: 'center',
+    color: '#333', // Dark gray text
   },
-  text: {
-    fontFamily: 'TYPOGRAPH-PRO-Semi-Bold',
-    fontSize: 50,
-    padding: 5,
-  },
-
   row: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: '100%',
-    paddingHorizontal: 10,
-    marginTop: 10,
-    marginBottom: 10,
+    marginBottom: 20,
   },
   component: {
     flex: 1,
-    minWidth: '40%', // Adjust as needed based on your design
     alignItems: 'center',
+    borderRadius: 10,
+    padding: 5,
+    marginHorizontal: 10,
+    shadowColor: 'black',
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    shadowOffset: { width: 0, height: 2 }, // Adjust the height to spread the shadow vertically
+    elevation: 5, // Android shadow
   },
   sectionHeader: {
-    fontSize: 20,
+    fontSize: 15,
     fontWeight: 'bold',
-    marginBottom: 10,
-    textAlign: 'center', // Ensure text is centered horizontally
+    textAlign: 'center',
+    color: 'black', // Dark gray text
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: '100%',
-    marginTop: 20,
-    marginBottom: 40,
   },
   button: {
+    width: '40%',
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingVertical: 5,
     backgroundColor: 'black',
-    borderRadius: 15,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonText: {
-    color: 'white',
+    color: 'white', // White text
     fontSize: 16,
+    fontWeight: 'bold',
   },
 })
 

@@ -38,7 +38,7 @@ export default () => {
           ),
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="wardrobe"
         options={{
           title: '',
@@ -51,8 +51,8 @@ export default () => {
             />
           ),
         }}
-      />
-      <Tabs.Screen
+      /> */}
+      {/* <Tabs.Screen
         name="editprofile"
         options={{
           title: '',
@@ -61,7 +61,7 @@ export default () => {
             <FontAwesome6 name="user-pen" size={24} color="black" />
           ),
         }}
-      />
+      /> */}
       <Tabs.Screen
         name="friends"
         options={{

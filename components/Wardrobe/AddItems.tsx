@@ -25,6 +25,7 @@ import {
   uploadBytes,
   getDownloadURL,
 } from 'firebase/storage'
+import { router } from 'expo-router'
 
 interface ClothingItem {
   name: string
@@ -241,14 +242,14 @@ export default function AddClothingItem({ userId }: { userId: string }) {
               <TouchableOpacity
                 style={[
                   styles.buttonWrapper,
-                  type === 'shoes' && styles.selectedButton,
+                  type === 'footwear' && styles.selectedButton,
                 ]}
-                onPress={() => toggleCategory('shoes')}
+                onPress={() => toggleCategory('footwear')}
               >
                 <Text
                   style={[
                     styles.buttonText,
-                    type === 'shoes' && styles.selectedButtonText,
+                    type === 'footwear' && styles.selectedButtonText,
                   ]}
                 >
                   Footwear
@@ -262,6 +263,12 @@ export default function AddClothingItem({ userId }: { userId: string }) {
               disabled={uploading}
             >
               <Text style={styles.addButtonText}>Add Item</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.addButton}
+              onPress={() => router.push('/profile')} // Navigate back to ProfilePage
+            >
+              <Text style={styles.addButtonText}>Back to Profile</Text>
             </TouchableOpacity>
           </View>
         </TouchableWithoutFeedback>
@@ -327,9 +334,10 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     margin: 5,
     paddingVertical: 10,
-    paddingHorizontal: '25%',
     alignSelf: 'center', // Center the button
     backgroundColor: 'black',
+    minWidth: '50%', // Ensure both buttons are of same width
+    paddingHorizontal: 20,
   },
   addButtonText: {
     color: 'white',

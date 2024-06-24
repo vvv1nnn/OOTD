@@ -1,8 +1,9 @@
 // FindFriends.test.tsx
 
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react-native'
-import FindFriends from 'components/Friends/findFriends.tsx'
+import { render, fireEvent } from 'react-test-renderer'
+import FindFriends from '@/components/Friends/findFriends'
+import getPathFromState from 'expo-router/build/fork/getPathFromState'
 
 describe('<FindFriends />', () => {
   it('renders correctly', () => {

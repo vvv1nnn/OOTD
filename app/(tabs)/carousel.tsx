@@ -27,7 +27,20 @@ import firebase from '@/firebaseConfig'
 import DisplayClothing from '@/components/Carousel/DisplayClothing'
 
 const App = () => {
-  const username = 'vin' // Placeholder until auth is implemented
+  const [userId, setUserId] = useState('')
+
+  useEffect(() => {
+    // Fetch the current user
+    const currentUser = firebase.auth.currentUser
+
+    if (currentUser) {
+      // Set the user ID
+      setUserId(currentUser.displayName as string)
+    } else {
+      // Handle the case where the user is not logged in
+      Alert.alert('Authentication Error', 'No user is logged in')
+    }
+  }, [])
 
   // State for currently displayed image in each category
   const [currentHeadwear, setCurrentHeadwear] = useState<string | null>(null)
@@ -63,7 +76,7 @@ const App = () => {
         const imagePromises = categories.map(async (category) => {
           const categoryRef = databaseRef(
             firebase.database,
-            `users/${username}/clothing/${category}`
+            `users/${userId}/clothing/${category}`
           )
           const snapshot = await get(categoryRef)
           if (snapshot.exists()) {
@@ -97,7 +110,7 @@ const App = () => {
     }
 
     fetchImages()
-  }, [username])
+  }, [userId])
 
   // Shuffle function to select a random image
   const getRandomImage = (images: string[]) => {
@@ -147,7 +160,7 @@ const App = () => {
       const newPostRef = push(databaseRef(firebase.database, 'posts'))
       await set(newPostRef, {
         imageUrl: downloadURL,
-        username,
+        username: userId,
         createdAt: serverTimestamp(),
         likes: 0,
       })
@@ -204,23 +217,22 @@ const App = () => {
               <DisplayClothing image={currentFootwear} />
             </View>
           </View>
-
-          {/* Buttons row */}
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button} onPress={handleShuffle}>
-              <Text style={styles.buttonText}>Shuffle</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={captureAndUpload}
-              disabled={uploading}
-            >
-              <Text style={styles.buttonText}>
-                {uploading ? 'Uploading...' : 'Post'}
-              </Text>
-            </TouchableOpacity>
-          </View>
         </ViewShot>
+        {/* Buttons row */}
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={handleShuffle}>
+            <Text style={styles.buttonText}>Shuffle</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={captureAndUpload}
+            disabled={uploading}
+          >
+            <Text style={styles.buttonText}>
+              {uploading ? 'Uploading...' : 'Post'}
+            </Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </SafeAreaView>
   )

@@ -19,7 +19,6 @@ import { ref, set, get } from 'firebase/database'
 
 export default function EditProfile({ userId }) {
   const [firstName, setFirstName] = useState('')
-  const [email, setEmail] = useState('')
   const [bio, setBio] = useState('')
   const [bioHeight, setBioHeight] = useState(50) // Initial height for the bio input
 
@@ -33,7 +32,6 @@ export default function EditProfile({ userId }) {
         if (snapshot.exists()) {
           const data = snapshot.val()
           setFirstName(data.firstName || '')
-          setEmail(data.email || '')
           setBio(data.bio || '')
         }
       } catch (error) {
@@ -47,7 +45,7 @@ export default function EditProfile({ userId }) {
   const handleSubmit = async () => {
     try {
       const dbRef = ref(firebase.database, `users/${userId}/profile`)
-      const newDetails = { firstName, email, bio }
+      const newDetails = { firstName, bio }
 
       await set(dbRef, newDetails)
       Alert.alert('Success', 'Your details have been updated!')
@@ -78,19 +76,6 @@ export default function EditProfile({ userId }) {
                     placeholderTextColor="#999"
                     style={styles.input}
                     accessibilityLabel="First Name"
-                  />
-                </View>
-
-                <View style={styles.inputContainer}>
-                  <Text style={styles.label}>Email</Text>
-                  <TextInput
-                    value={email}
-                    onChangeText={setEmail}
-                    placeholder="Enter your email"
-                    placeholderTextColor="#999"
-                    keyboardType="email-address"
-                    style={styles.input}
-                    accessibilityLabel="Email"
                   />
                 </View>
 

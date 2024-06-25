@@ -1,13 +1,30 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, Alert } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
+import { useEffect, useState } from 'react'
+
 import AddClothingItem from '@/components/Wardrobe/AddItems'
+import firebase from '@/firebaseConfig'
 
 export default function Wardrobe() {
+  const [userId, setUserId] = useState('')
+
+  useEffect(() => {
+    // Fetch the current user
+    const currentUser = firebase.auth.currentUser
+
+    if (currentUser) {
+      // Set the user ID
+      setUserId(currentUser.displayName as string)
+    } else {
+      // Handle the case where the user is not logged in
+      Alert.alert('Authentication Error', 'No user is logged in')
+    }
+  }, [])
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
         <Text style={styles.wardrobe}> WARDROBE </Text>
-        <AddClothingItem userId={'vin'} />
+        <AddClothingItem userId={userId} />
       </View>
       <StatusBar style="auto" />
     </View>

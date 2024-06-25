@@ -92,7 +92,7 @@ const PostItem: React.FC<PostItemProps> = ({ item, onLike }) => (
       )}
       <Text style={styles.username}>{item.username}</Text>
     </View>
-    <View>
+    <View style={styles.postImageContainer}>
       <Image source={{ uri: item.imageUrl }} style={styles.postImage} />
     </View>
     <View>
@@ -113,8 +113,8 @@ const styles = StyleSheet.create({
   },
   separator: {
     height: 1.5,
-    backgroundColor: 'black', // Change to a darker color for better contrast
-    width: '100%', // Slightly reduce width to account for padding
+    backgroundColor: 'black',
+    width: '100%',
     marginTop: 30,
   },
   postContainer: {
@@ -139,17 +139,27 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
+  postImageContainer: {
+    width: '100%',
+    borderWidth: 2,
+    borderColor: 'black',
+    borderRadius: 5,
+    overflow: 'hidden',
+    shadowColor: '#000', // Shadow color
+    shadowOffset: { width: 0, height: 2 }, // Shadow offset
+    shadowOpacity: 0.8, // Shadow opacity
+    shadowRadius: 5, // Shadow radius
+    elevation: 5, // Elevation for Android
+    marginBottom: 10, // Add some margin to ensure shadow doesn't affect spacing with other elements
+    backgroundColor: 'white', // Background color for better shadow visibility
+  },
   postImage: {
     width: '100%',
-    height: 650,
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    elevation: 5, // For Android
-    borderWidth: 1,
-    borderColor: 'white',
+    aspectRatio: 1 / 1.6,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
   },
   caption: {
     fontSize: 14,
@@ -160,7 +170,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
     textAlign: 'center',
-    marginTop: 10,
   },
   likeButton: {
     backgroundColor: 'black',

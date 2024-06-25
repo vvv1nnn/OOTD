@@ -63,7 +63,7 @@ export default function ShowUserProfile() {
           <ProfilePicture />
           <Text style={styles.username}>{userId}</Text>
           <Text style={styles.bio}>{profileData.firstName}</Text>
-          <Text style={styles.bio}>{profileData.bio}</Text>
+          <Text style={styles.bio2}>{profileData.bio}</Text>
         </>
       ) : (
         <Text>Loading Profile...</Text>
@@ -77,9 +77,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 25,
-    marginTop: 20,
+    marginTop: 10,
   },
   bio: {
+    textAlign: 'center',
+    margin: 10,
+    fontWeight: 'bold',
+  },
+  bio2: {
     textAlign: 'center',
     margin: 10,
   },

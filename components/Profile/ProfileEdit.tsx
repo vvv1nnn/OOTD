@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import {
   View,
   TextInput,
-  Button,
   Alert,
   StyleSheet,
   KeyboardAvoidingView,
@@ -21,6 +20,7 @@ import { ref, set, get } from 'firebase/database'
 export default function EditProfile({ userId }) {
   const [firstName, setFirstName] = useState('')
   const [bio, setBio] = useState('')
+  const [bioHeight, setBioHeight] = useState(50) // Initial height for the bio input
 
   const router = useRouter()
 
@@ -55,122 +55,162 @@ export default function EditProfile({ userId }) {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.content}>
-          <View style={styles.imageContainer}>
-            <Image
-              source={require('@/assets/images/SADCAT.png')}
-              style={styles.image}
-            />
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}
+    >
+      <ScrollView
+        contentContainerStyle={styles.scrollViewContent}
+        keyboardShouldPersistTaps="handled"
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.content}>
+            <View style={styles.header}>
+              <View style={styles.formContainer}>
+                <View style={styles.inputContainer}>
+                  <Text style={styles.label}>First Name</Text>
+                  <TextInput
+                    value={firstName}
+                    onChangeText={setFirstName}
+                    placeholder="Enter your first name"
+                    placeholderTextColor="#999"
+                    style={styles.input}
+                    accessibilityLabel="First Name"
+                  />
+                </View>
+
+                <View style={styles.inputContainer}>
+                  <Text style={styles.label}>Bio</Text>
+                  <TextInput
+                    value={bio}
+                    onChangeText={setBio}
+                    placeholder="Tell us about yourself"
+                    placeholderTextColor="#999"
+                    multiline={true}
+                    style={[styles.input, { height: bioHeight }]} // Use dynamic height
+                    accessibilityLabel="Bio"
+                    onContentSizeChange={(event) =>
+                      setBioHeight(
+                        event.nativeEvent.contentSize.height > 50
+                          ? event.nativeEvent.contentSize.height
+                          : 50
+                      )
+                    }
+                  />
+                </View>
+
+                <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+                  <Text style={styles.buttonText}>Save Changes</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={[styles.button, styles.backButton]}
+                  onPress={() => router.push('/profile')}
+                >
+                  <Text style={styles.buttonText}>Back to Profile</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
           </View>
-
-          <View style={styles.sectionContainer}>
-            <Text style={styles.label}>First Name</Text>
-            <TextInput
-              value={firstName}
-              onChangeText={setFirstName}
-              placeholder="First Name"
-              placeholderTextColor="darkgray"
-              style={styles.input}
-              accessibilityLabel="First Name"
-            />
-          </View>
-
-          <View style={styles.sectionContainer}>
-            <Text style={styles.label}>Bio</Text>
-            <TextInput
-              value={bio}
-              onChangeText={setBio}
-              placeholder="Bio"
-              placeholderTextColor="darkgray"
-              multiline={true}
-              style={styles.textArea}
-              accessibilityLabel="Bio"
-            />
-          </View>
-
-          <TouchableOpacity style={styles.addButton} onPress={handleSubmit}>
-            <Text style={styles.addButtonText}>Save Profile</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[styles.addButton, styles.backButton]}
-            onPress={() => router.push('/carousel')}
-          >
-            <Text style={styles.addButtonText}>Back to Profile</Text>
-          </TouchableOpacity>
-        </View>
-      </TouchableWithoutFeedback>
-    </ScrollView>
+        </TouchableWithoutFeedback>
+      </ScrollView>
+    </KeyboardAvoidingView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: '#fff', // Ensure there's a background color to cover the entire screen
+    width: '100%',
+  },
+  scrollViewContent: {
     flexGrow: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingTop: 10,
+    paddingBottom: 20,
+    width: '100%',
+    justifyContent: 'center', // Center content vertically
+    alignItems: 'center', // Center content horizontally
   },
   content: {
     width: '100%',
+    alignItems: 'center',
   },
-  imageContainer: {
+  header: {
+    flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
   },
-  image: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-  },
-  sectionContainer: {
-    marginBottom: 10,
+  headerText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginLeft: 10,
+    color: '#333',
     width: '100%',
-    paddingHorizontal: 30,
+  },
+  image: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+  },
+  formContainer: {
+    width: '100%',
+    maxWidth: 400, // Adjust max width based on your design preference
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  inputContainer: {
+    marginBottom: 20,
+    width: '100%', // Ensure input containers stretch to full width
   },
   label: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#444',
+    color: '#333',
     marginBottom: 5,
     textAlign: 'center',
+    paddingBottom: 10,
   },
   input: {
-    height: 20,
+    height: 40,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
+    paddingHorizontal: 5,
+    fontSize: 16,
+    color: '#333',
+    width: '100%', // Ensure inputs stretch to full width
   },
   textArea: {
-    height: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
     textAlignVertical: 'top',
+    paddingTop: 8,
+    width: '100%', // Ensure text areas stretch to full width
   },
-  separator: {
-    height: 1,
-    width: '100%',
-    alignSelf: 'center',
-    marginVertical: 5,
-  },
-  addButton: {
-    width: '100%',
-    borderWidth: 1,
-    borderRadius: 3,
-    marginVertical: 10,
-    paddingVertical: 7,
+  button: {
     backgroundColor: 'black',
-    justifyContent: 'center',
+    borderRadius: 5,
+    paddingVertical: 6,
+    marginTop: 0,
     alignItems: 'center',
+    width: '100%', // Ensure buttons stretch to full width
   },
-  addButtonText: {
+  buttonText: {
     color: 'white',
+    fontSize: 16,
     fontWeight: 'bold',
-    textAlign: 'center',
   },
   backButton: {
-    backgroundColor: 'black',
+    backgroundColor: '#aaa',
+    marginTop: 10,
   },
 })

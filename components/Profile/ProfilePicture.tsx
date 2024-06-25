@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
     width: '100%', // Ensure the background color spans the entire screen width
+    paddingTop: 10,
   },
   //this is for the profile picture
   circle: {

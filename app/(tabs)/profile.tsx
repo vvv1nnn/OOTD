@@ -25,7 +25,7 @@ export default function ProfilePage() {
           <ProfileName />
           <ProfileBio /> */}
           <ShowUserProfile />
-          <View style={styles.buttonContainer}>
+          <View style={styles.buttonContainer2}>
             <TouchableOpacity
               style={styles.button}
               onPress={() => router.push('/editprofile')}
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '50%',
+    width: '47%',
     marginBottom: 10,
   },
   buttonContainer2: {
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
-    height: 26,
+    height: 27,
     backgroundColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',

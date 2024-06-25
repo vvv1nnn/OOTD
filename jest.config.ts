@@ -3,16 +3,20 @@ import type { Config } from 'jest'
 const config: Config = {
   testEnvironment: 'jsdom',
   preset: 'jest-expo',
-  globals: {
-    'ts-jest': {
-      tsconfig: {
-        jsx: 'react',
-      },
-    },
-  },
+
   transform: {
-    // '^.+\\.js$': '<rootDir>/node_modules/react-native/jest/preprocessor.js',
-    '^.+\\.tsx?$': 'ts-jest',
+    '^.+\\.js$': [
+      'babel-jest',
+      { caller: { name: 'metro', bundler: 'metro', platform: 'ios' } },
+    ],
+    '^.+\\.tsx?$': [
+      'ts-jest',
+      {
+        tsconfig: {
+          jsx: 'react-jsx',
+        },
+      },
+    ],
   },
   testMatch: ['**/?(*.)+(spec|test).ts?(x)'],
   collectCoverageFrom: [

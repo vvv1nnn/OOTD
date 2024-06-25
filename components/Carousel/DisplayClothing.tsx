@@ -2,15 +2,14 @@ import React from 'react'
 import { StyleSheet, View, Image } from 'react-native'
 
 type Props = {
-  clothingType: string
-  randomNumber: number
+  image: string | null | undefined
 }
 
-const DisplayClothing = ({ image }) => {
+const DisplayClothing = ({ image }: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image style={styles.image} source={{ uri: image }} />
+        <Image style={styles.image} source={{ uri: image ?? undefined }} />
       </View>
     </View>
   )

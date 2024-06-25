@@ -57,7 +57,7 @@ export default function AddClothingItem({ userId }: { userId: string }) {
     const blob = await response.blob()
     const imageRef = storageRef(
       firebase.storage,
-      `images/${new Date().toISOString()}`
+      `${userId}/${type}/${new Date().toISOString()}`
     )
 
     await uploadBytes(imageRef, blob)

@@ -1,4 +1,3 @@
-import { router } from 'expo-router'
 import React, { useState } from 'react'
 import {
   View,
@@ -8,22 +7,57 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from 'react-native'
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
+import { useRouter } from 'expo-router'
+
+import firebase from '@/firebaseConfig'
 
 const SignUpPage = ({ navigation }) => {
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const router = useRouter()
 
-  const handleSignUp = () => {
-    // Implement your sign-up logic here (e.g., send data to server, validate inputs)
-    console.log('Signing up with:', { name, username, email, password })
-    // Reset fields after sign-up
-    setName('')
-    setUsername('')
-    setEmail('')
-    setPassword('')
+  const handleSignUp = async () => {
+    try {
+      if (!email || !password || !name || !username) {
+        Alert.alert('Validation Error', 'All fields are required.')
+        return
+      }
+
+      const userCredential = await createUserWithEmailAndPassword(
+        firebase.auth,
+        email,
+        password
+      )
+      const user = userCredential.user
+
+      await updateProfile(user, {
+        displayName: username,
+      })
+      Alert.alert('Success', 'User registered successfully!')
+      setName('')
+      setUsername('')
+      setEmail('')
+      setPassword('')
+    } catch (error) {
+      console.error('Sign-up failed:', error)
+      let errorMessage = 'Sign-up failed. Please try again.'
+
+      if (error.code === 'auth/email-already-in-use') {
+        errorMessage = 'The email address is already in use by another account.'
+      } else if (error.code === 'auth/invalid-email') {
+        errorMessage = 'The email address is badly formatted.'
+      } else if (error.code === 'auth/weak-password') {
+        errorMessage =
+          'The password is too weak. It should be at least 6 characters.'
+      }
+
+      Alert.alert('Sign-up Failed', errorMessage)
+    }
   }
 
   const navigateToLogin = () => {

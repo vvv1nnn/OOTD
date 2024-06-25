@@ -7,22 +7,26 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from 'react-native'
 import { useRouter } from 'expo-router' // Import useRouter from expo-router
+import firebase from '@/firebaseConfig'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 
 const LoginPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const router = useRouter()
 
-  const handleLogin = () => {
-    // Implement your login logic here (e.g., send data to server, validate inputs)
-    console.log('Logging in with:', { email, password })
-    // Reset fields after login (this is just for demonstration)
-    setEmail('')
-    setPassword('')
-    // Navigate to Feed page
-    router.push('/feed')
+  const handleLogin = async () => {
+    try {
+      await signInWithEmailAndPassword(firebase.auth, email, password)
+      console.log('Login Sucessful')
+      router.push('/feed')
+    } catch (error) {
+      console.error('Login failed:', error)
+      Alert.alert('Login Failed, try again')
+    }
   }
 
   const navigateToSignUp = () => {

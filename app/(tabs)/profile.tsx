@@ -8,9 +8,7 @@ import {
 } from 'react-native'
 import { useRouter } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
-import ProfileName from '@/components/Profile/Username'
-import ProfileBio from '@/components/Profile/Bio'
-import ProfilePicture from '@/components/Profile/ProfilePicture'
+
 import ProfileWardrobe from '@/components/Profile/Wardrobe'
 import ShowUserProfile from '@/components/Profile/UserProfile'
 
@@ -21,9 +19,6 @@ export default function ProfilePage() {
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.profileContainer}>
-          {/*<ProfilePicture />
-          <ProfileName />
-          <ProfileBio /> */}
           <ShowUserProfile />
           <View style={styles.buttonContainer}>
             <TouchableOpacity

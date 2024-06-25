@@ -11,13 +11,6 @@
     "test": "jest --watchAll",
     "lint": "expo lint"
   },
-  "jest": {
-    "preset": "jest-expo",
-    "verbose": true,
-   "transformIgnorePatterns": [
-    "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|(@firebase))" 
-  ]
-  },
   "dependencies": {
     "@expo/vector-icons": "^14.0.0",
     "@react-native-community/masked-view": "^0.1.11",
@@ -49,11 +42,13 @@
     "react-native-screens": "3.31.1",
     "react-native-view-shot": "^3.8.0",
     "react-native-web": "~0.19.10",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "ts-node": "^10.9.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@babel/preset-typescript": "^7.24.7",
+    "@jest/globals": "^29.7.0",
     "@types/jest": "^29.5.12",
     "@types/react": "~18.2.45",
     "@types/react-test-renderer": "^18.0.7",

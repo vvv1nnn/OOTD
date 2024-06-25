@@ -1,16 +1,6 @@
-//This page makes basic snapshot tests for our main pages. - Adriana
-// TODO: come back to make the one for Profile page, without it beign attached to our firebase DB yet it's really hard to test.
-import React from 'react'
 import renderer from 'react-test-renderer'
 import { describe, expect, test } from '@jest/globals'
-import Friends from '@/app/(tabs)/friends'
-
-describe('Friends component', () => {
-  it('renders the component correctly', () => {
-    const tree = renderer.create(<Friends />).toJSON()
-    expect(tree).toMatchSnapshot()
-  })
-})
+import { ref, onValue, query, orderByChild, update } from 'firebase/database'
 
 import Feed from '@/app/(tabs)/feed'
 

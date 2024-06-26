@@ -67,8 +67,7 @@ const SignUpPage = ({ navigation }) => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <ScrollView>
-      <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.text}>OOTD.</Text>
         <View style={styles.formContainer}>
           <Text style={styles.title}>REGISTER</Text>
@@ -114,20 +113,18 @@ const SignUpPage = ({ navigation }) => {
             <Text style={styles.login}>Already signed up? Press to Login</Text>
           </TouchableOpacity>
         </View>
-      </View>
-        </ScrollView>
+      </ScrollView>
     </TouchableWithoutFeedback>
-    
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: '#fff',
+    justifyContent: 'center', // Center content vertically
+    alignItems: 'center', // Center content horizontally
     padding: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   text: {
     fontFamily: 'TYPOGRAPH-PRO-Semi-Bold',
@@ -140,8 +137,6 @@ const styles = StyleSheet.create({
   formContainer: {
     width: '100%',
     alignItems: 'center',
-    marginTop: 'auto', // Center vertically by pushing to the top of the remaining space
-    marginBottom: 'auto', // Center vertically by pushing to the bottom of the remaining space
   },
   title: {
     fontSize: 24,
@@ -174,6 +169,6 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     margin: 10,
   },
-});
+})
 
 export default SignUpPage

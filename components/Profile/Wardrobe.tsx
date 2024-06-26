@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { router } from 'expo-router'
 
-const logo = require('@/assets/images/SADCAT.png')
+const logo = require('@/assets/images/plus.jpg')
 
 const ProfileWardrobe = () => {
   return (

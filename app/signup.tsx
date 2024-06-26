@@ -140,7 +140,8 @@ const styles = StyleSheet.create({
   formContainer: {
     width: '100%',
     alignItems: 'center',
-    marginTop: 100, // Adjust this value as needed for spacing
+    marginTop: 'auto', // Center vertically by pushing to the top of the remaining space
+    marginBottom: 'auto', // Center vertically by pushing to the bottom of the remaining space
   },
   title: {
     fontSize: 24,
@@ -173,6 +174,6 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     margin: 10,
   },
-})
+});
 
 export default SignUpPage

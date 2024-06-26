@@ -66,8 +66,8 @@ const SignUpPage = ({ navigation }) => {
   }
 
   return (
-    <ScrollView>
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <ScrollView>
       <View style={styles.container}>
         <Text style={styles.text}>OOTD.</Text>
         <View style={styles.formContainer}>
@@ -115,8 +115,9 @@ const SignUpPage = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </View>
+        </ScrollView>
     </TouchableWithoutFeedback>
-    </ScrollView>
+    
   )
 }
 

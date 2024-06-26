@@ -7,6 +7,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
+  ScrollView,
   Alert,
 } from 'react-native'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
@@ -65,6 +66,7 @@ const SignUpPage = ({ navigation }) => {
   }
 
   return (
+    <ScrollView>
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
         <Text style={styles.text}>OOTD.</Text>
@@ -114,6 +116,7 @@ const SignUpPage = ({ navigation }) => {
         </View>
       </View>
     </TouchableWithoutFeedback>
+    </ScrollView>
   )
 }
 
